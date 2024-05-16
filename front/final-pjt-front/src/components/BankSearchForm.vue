@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Home</h1>
-    
+    <h1>Bank Search Form</h1>
   </div>
 </template>
 

@@ -10,6 +10,12 @@ import ProfileView from '@/views/ProfileView.vue'
 import RecommendView from '@/views/RecommendView.vue'
 
 // component import
+import AccountLoginForm from '@/components/AccountLoginForm.vue'
+import AccountSignupForm from '@/components/AccountSignupForm.vue'
+import ProductFixedList from '@/components/ProductFixedList.vue'
+import ProductInstallmentList from '@/components/ProductInstallmentList.vue'
+import CommunityListItemDetail from '@/components/CommunityListItemDetail.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -22,15 +28,19 @@ const router = createRouter({
       path: '/account',
       name: 'account',
       component: AccountView,
-      // children: [
-      //   {path: 'login' , name: 'login', component: LoginForm},
-      //   {path: 'signup' , name: 'signup', component: SignupForm},
-      // ]
+      children: [
+        {path: 'login' , name: 'login', component: AccountLoginForm},
+        {path: 'signup' , name: 'signup', component: AccountSignupForm},
+      ]
     },
     {
       path: '/product',
       name: 'product',
-      component: ProductView
+      component: ProductView,
+      children: [
+        {path: 'fixed' , name: 'fixed', component: ProductFixedList},
+        {path: 'installment' , name: 'installment', component: ProductInstallmentList},
+      ]
     },
     {
       path: '/exchange',
@@ -45,7 +55,10 @@ const router = createRouter({
     {
       path: '/community',
       name: 'community',
-      component: CommunityView
+      component: CommunityView,
+      children: [
+        {path: ':postId' , name: 'postdetail', component: CommunityListItemDetail},
+      ]
     },
     {
       path: '/profile',
