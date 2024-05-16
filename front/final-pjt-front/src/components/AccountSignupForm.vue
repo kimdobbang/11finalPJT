@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Profile</h1>
+    <h1>SignUp</h1>
   </div>
 </template>
 

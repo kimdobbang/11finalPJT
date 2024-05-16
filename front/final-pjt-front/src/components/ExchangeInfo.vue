@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Profile</h1>
+    <h1>Exchange Infomation</h1>
+    <p>각국의 환율정보 표시</p>
   </div>
 </template>
 
