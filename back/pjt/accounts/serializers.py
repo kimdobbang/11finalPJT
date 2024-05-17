@@ -15,6 +15,10 @@ class CustomRegisterSerializer(RegisterSerializer):
     age = serializers.IntegerField()
     money = serializers.IntegerField()
     salary = serializers.IntegerField()
+    
+    class Meta:
+        model = UserModel
+        fields = ('username', 'password1', 'password2', 'email', 'nickname', 'profile_img', 'age', 'money', 'salary')
 
     def get_cleaned_data(self):
         data = super().get_cleaned_data()
