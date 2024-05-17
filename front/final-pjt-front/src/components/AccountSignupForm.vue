@@ -18,11 +18,11 @@
     <label for="email">email : </label>
     <input type="email" id="email" v-model="email"><br>
 
-    <div>
+    <!-- <div>
       <img ref="showImg" v-show="profileImg">
-    </div>
+    </div> -->
     <label for="profile">profile img :</label>
-    <input ref='inputImg' type="file" id="profile" name="profile" accept="image/*" @change="uploadImg()">
+    <input ref='inputImg' type="file" id="profile" name="profile" accept="image/*" @change="uploadImg">
     <br>
 
     <label for="age">age: </label>
@@ -53,19 +53,26 @@ const profileImg = ref(null)
 const age = ref(null)
 const money = ref(null)
 const salary = ref(null)
-const showImg = ref(null)
 
 const inputImg = ref(null)
 
 const uploadImg = function () {
-  profileImg = inputImg.files[0]
-  showImg.src = URL.createObjectURL(profileImg)
+  profileImg.value = inputImg.value.files[0]
 }
 
 const signUpEvent = function () {
   const payload = {
-    username, password1, password2, nickname, email, profileImg, age, money, salary
+    username: username.value,
+    password1: password1.value,
+    password2: password2.value,
+    nickname: nickname.value,
+    email: email.value,
+    profileImg: profileImg.value,
+    age: age.value,
+    money: money.value,
+    salary: salary.value
   }
+  console.log(profileImg.value)
   store.signUp(payload)
 }
 </script>
