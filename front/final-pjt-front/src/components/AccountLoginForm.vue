@@ -4,9 +4,9 @@
   </div>
   <form @submit.prevent="logInEvent">
     <label for="username">username : </label>
-    <input type="text" id="username"><br>
+    <input type="text" id="username" v-model.trim="username"><br>
     <label for="password">password : </label>
-    <input type="password" id="password"><br>
+    <input type="password" id="password" v-model.trim="password"><br>
     <input type="submit" value="login">
   </form>
 </template>
@@ -23,7 +23,7 @@ const password = ref(null)
 const logInEvent = function () {
   const payload = {
     username: username.value,
-    password: password.value
+    password: password.value,
   }
   store.logIn(payload)
 }
