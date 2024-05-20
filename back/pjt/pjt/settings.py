@@ -29,6 +29,10 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # 환경변수 읽어오기(기본 사용방법)
 os.environ.get('API_KEY')
+os.environ.get('EX_API_KEY')
+
+API_KEY = env('API_KEY')
+EX_API_KEY = env('EX_API_KEY')
 
 
 # Quick-start development settings - unsuitable for production
@@ -50,6 +54,7 @@ INSTALLED_APPS = [
     'accounts',
     'articles',
     'products',
+    'exchanges',
     
     # DRF
     'corsheaders',
@@ -82,9 +87,14 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 # DRF auth settings
 # Token 인증을 기본으로 사용하도록 설정
 REST_FRAMEWORK = {
+    # Authentication (drf 모든 view함수에 토큰 요청한다)
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+    # permission (모든 View 함수에 대한 접근 허용 -> 모두 다 풀우주고 함수마다 디테일하게 설정)
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
 }
 
 REST_AUTH = {
