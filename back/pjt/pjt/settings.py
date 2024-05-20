@@ -30,6 +30,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # 환경변수 읽어오기(기본 사용방법)
 os.environ.get('API_KEY')
 
+API_KEY = env('API_KEY')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
