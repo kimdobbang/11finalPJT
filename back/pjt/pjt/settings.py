@@ -29,8 +29,10 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # 환경변수 읽어오기(기본 사용방법)
 os.environ.get('API_KEY')
+os.environ.get('EX_API_KEY')
 
 API_KEY = env('API_KEY')
+EX_API_KEY = env('EX_API_KEY')
 
 
 # Quick-start development settings - unsuitable for production
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
     'accounts',
     'articles',
     'products',
+    'exchanges',
     
     # DRF
     'corsheaders',
