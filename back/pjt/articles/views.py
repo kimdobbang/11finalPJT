@@ -20,7 +20,7 @@ def index(request):
     if request.method == 'GET':
         articles = get_list_or_404(Article)
         serializer = ArticleListSerializer(articles, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     # [POST] 게시글 작성
     elif request.method == 'POST':
         serializer = ArticleSerializer(data=request.data)
@@ -36,7 +36,7 @@ def detail(request, article_id):
     # [GET] 단일 게시글 상세 조회
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
-        return Response(serializer.data)
+        return Response(serializer.data,status=status.HTTP_200_OK)
     
     # [DELETE] 게시글 삭제
     elif request.method == 'DELETE':
@@ -74,7 +74,7 @@ def comments_detail(request, article_id, comment_id):
     # [GET] 단일 댓글 조회
     if request.method == 'GET':
         serializer = CommentSerializer(comment)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     # [DELETE] 댓글 삭제
     elif request.method == 'DELETE':
@@ -90,7 +90,7 @@ def comments_detail(request, article_id, comment_id):
         if request.user == comment.user:
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
-                return Response(serializer.data)
+                return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 

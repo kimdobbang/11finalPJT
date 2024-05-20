@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
@@ -14,15 +14,17 @@ from accounts.serializers import UserInfoSerializer
 
 api_key = settings.API_KEY
 
+# ----------- 저장 -----------
 
 @api_view(['GET'])
 def save_fixed(request):
     url = f'http://finlife.fss.or.kr/finlifeapi/depositProductsSearch.json?auth={api_key}&topFinGrpNo=020000&pageNo=1'
 
-    # API 데이터 조회
+    # API 데이터 조회하여 request 객체 생성
     response = requests.get(url).json()
     
-    # 정기예금 상품 목록을 순회하며 저장
+    # (1) 상품 목록 저장
+    # Fixed 정기예금 상품 목록을 순회하며 저장
     for dic in response.get('result').get('baseList'):
         fixed_code = dic['fin_prdt_cd']
         fixed_name = dic['fin_prdt_nm']
@@ -47,13 +49,13 @@ def save_fixed(request):
             'etc_note': etc_note,
             'max_limit': max_limit
         }
-
+        # 직렬화 및 유효성검사 후 저장
         serializer = FixedSerializer(data=save_data)
 
         if serializer.is_valid(raise_exception=True):
             serializer.save()
 
-    # 정기예금 상품 옵션 목록을 순회하며 저장
+    # FixedOption 정기예금 상품 옵션 목록을 순회하며 저장
     for dic in response.get('result').get('optionList'):
         fin_prdt_cd = dic['fin_prdt_cd']
         intr_rate_type_nm = dic['intr_rate_type_nm']
@@ -68,15 +70,14 @@ def save_fixed(request):
             'intr_rate2': intr_rate2,
         }
 
-        # 옵션의 외래키는 데이터에서 가져올 수 없으므로 직접 입력한다.
-        product = Fixed.objects.get(fixed_code=fin_prdt_cd)  # 참조하는 상품 조회
+        # 옵션의 외래키는 api response에서 가져올 수 없으므로 직접 입력한다.
+        product = Fixed.objects.get(fixed_code=fin_prdt_cd)  # 외래키가 참조하는 상품 조회
         serializer = FixedOptionsSerializer(data=save_data)
         
         if serializer.is_valid(raise_exception=True):
             serializer.save(product=product)    # 저장하는 과정에서 외래키를 입력
 
     return JsonResponse({'message' : 'save Fixed complete!'})
-
 
 
 @api_view(['GET'])
@@ -111,9 +112,8 @@ def save_installment(request):
             'etc_note': etc_note,
             'max_limit': max_limit
         }
-
+        # 직렬화 및 유효성검사 후 저장
         serializer = InstallmentSerializer(data=save_data)
-
         if serializer.is_valid(raise_exception=True):
             serializer.save()
 
@@ -134,8 +134,8 @@ def save_installment(request):
             'intr_rate2': intr_rate2,
         }
 
-        # 옵션의 외래키는 데이터에서 가져올 수 없으므로 직접 입력한다.
-        product = Installment.objects.get(installment_code=fin_prdt_cd)  # 참조하는 상품 조회
+        # 옵션의 외래키는 api response 데이터에서 가져올 수 없으므로 직접 입력
+        product = Installment.objects.get(installment_code=fin_prdt_cd)  #외래키가 참조하는 상품 조회
         serializer = InstallmentOptionsSerializer(data=save_data)
         
         if serializer.is_valid(raise_exception=True):
@@ -143,6 +143,8 @@ def save_installment(request):
 
     return JsonResponse({'message' : 'save Installment complete!'})
 
+
+# ----------- 조회 -----------
 
 # [GET] 전체 정기예금 상품 조회
 @api_view(['GET']) 
@@ -176,6 +178,24 @@ def get_installmentOption(request):
         serializer = InstallmentOptionsSerializer(installmentoption, many=True)
         return Response(serializer.data)
     
+    
+# [GET] 단일 정기예금 상품 상세조회 (product_id와 fixed_id 중 어느게 프론트가 편할지 회의)
+@api_view(['GET'])
+def detail_fixed(request, product_id):
+    fixed = get_object_or_404(Fixed, id=product_id)
+    serializer = FixedSerializer(fixed)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# [GET] 단일 정기적금 상품 상세조회
+@api_view(['GET'])
+def detail_installment(request, product_id):
+    installment = get_object_or_404(Installment, id=product_id)
+    serializer = InstallmentSerializer(installment)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# ----------- 상품가입 -----------
 
 # [POST] 정기예금 상품 가입
 @api_view(['POST'])
