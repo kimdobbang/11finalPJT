@@ -8,7 +8,6 @@
 </template>
 
 <script setup>
-import CommunityList from '@/components/community/CommunityList.vue';
 import { onMounted } from 'vue';
 import { useCommunityStore } from '@/stores/communitystore';
 import { useRouter,RouterView } from 'vue-router';

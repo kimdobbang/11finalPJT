@@ -16,6 +16,8 @@ import ProductFixedList from '@/components/product/ProductFixedList.vue'
 import ProductInstallmentList from '@/components/product/ProductInstallmentList.vue'
 import CommunityList from '@/components/community/CommunityList.vue'
 import CommunityListItemDetail from '@/components/community/CommunityListItemDetail.vue'
+import CommunityCreate from '@/components/community/CommunityCreate.vue'
+import CommunityUpdate from '@/components/community/CommunityUpdate.vue'
 
 // store import
 import { useAccountStore } from '@/stores/accountstore'
@@ -64,6 +66,8 @@ const router = createRouter({
       children: [
         {path: '' , name: 'communitylist', component: CommunityList},
         {path: ':articleId' , name: 'articledetail', component: CommunityListItemDetail},
+        {path: 'articlecreate' , name: 'articlecreate', component: CommunityCreate},
+        {path: 'articleupdate' , name: 'articleupdate', component: CommunityUpdate},
       ]
     },
     {

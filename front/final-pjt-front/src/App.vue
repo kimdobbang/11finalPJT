@@ -6,7 +6,7 @@
       <RouterLink :to="{name: 'product'}">Product</RouterLink> |
       <RouterLink :to="{name: 'bank'}">Find Bank</RouterLink> |
       <RouterLink :to="{name: 'exchange'}">Exchange</RouterLink> |
-      <RouterLink :to="{name: 'community'}">Community</RouterLink> |
+      <RouterLink :to="{name: 'communitylist'}">Community</RouterLink> |
       <RouterLink :to="{name: 'account'}" v-if="!accoutStore.isLogin">Account</RouterLink>
       <RouterLink :to="{name: 'login'}" v-if="accoutStore.isLogin" @click="logoutEvent">Logout</RouterLink>
     </nav>
