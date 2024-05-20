@@ -2,31 +2,23 @@
   <div>
     <ul>
       <CommunityListItem 
-      v-for="post in postList"
-      :post = "post"
-      @click-post-event="postDetail"
+      v-for="article in communityStore.articles"
+      :article = "article"
       />
     </ul>
   </div>
 </template>
 
 <script setup>
-import CommunityListItem from '@/components/community/CommunityListItem.vue';
-import {ref} from 'vue'
-import { useRouter } from 'vue-router';
+import CommunityListItem from '@/components/community/CommunityListItem.vue'
+import {onMounted, ref} from 'vue'
+import { useCommunityStore } from '@/stores/communitystore'
 
-const postList = ref([
-  {id: 1, title: 'sample1', content: 'sample1'},
-  {id: 2, title: 'sample2', content: 'sample2'},
-  {id: 3, title: 'sample3', content: 'sample3'},
-  {id: 4, title: 'sample4', content: 'sample4'},
-  {id: 5, title: 'sample5', content: 'sample5'},
-])
+const communityStore = useCommunityStore()
 
-const router = useRouter()
-const postDetail = function (postId) {
-  router.push({name:'postdetail', params: {'postId':postId}})
-}
+onMounted(() => {
+  communityStore.getArticles()
+})
 </script>
 
 <style scoped>

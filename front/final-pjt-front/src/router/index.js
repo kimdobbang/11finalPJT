@@ -16,6 +16,10 @@ import ProductFixedList from '@/components/product/ProductFixedList.vue'
 import ProductInstallmentList from '@/components/product/ProductInstallmentList.vue'
 import CommunityListItemDetail from '@/components/community/CommunityListItemDetail.vue'
 
+// store import
+import { useAccountStore } from '@/stores/accountstore'
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -57,7 +61,8 @@ const router = createRouter({
       name: 'community',
       component: CommunityView,
       children: [
-        {path: ':postId' , name: 'postdetail', component: CommunityListItemDetail},
+        {path: '' , name: 'communitylist', component: CommunityList},
+        {path: ':postId' , name: 'articledetail', component: CommunityListItemDetail},
       ]
     },
     {
@@ -73,5 +78,14 @@ const router = createRouter({
     
   ]
 })
-
+router.beforeEach((to,from) =>{
+  const accountStore = useAccountStore()
+  if (to.name != 'home' && to.name != 'account' && to.name !='login' && to.name != 'signup' && !accountStore.isLogin) {
+    alert('Please Login')
+    return {name: 'account'}
+  } else if (to.name === 'account' && accountStore.isLogin) {
+    alert('Already Login')
+    return {name: 'home'}
+  }
+})
 export default router

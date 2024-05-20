@@ -13,7 +13,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useStore } from '@/stores/accountstore';
+import { useAccountStore } from '@/stores/accountstore'
 
 const store = useAccountStore()
 
