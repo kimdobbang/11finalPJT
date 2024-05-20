@@ -24,4 +24,5 @@ urlpatterns = [
     path('accounts/', include('dj_rest_auth.urls')),
     path('accounts/join/', include('dj_rest_auth.registration.urls')),
     path('articles/', include('articles.urls')), 
+    path('products/', include('products.urls')), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
