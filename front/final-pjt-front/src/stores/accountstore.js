@@ -32,6 +32,7 @@ export const useAccountStore = defineStore('account', () => {
   // 로그인
   const logIn = function (payload) {
     const { username, password } = payload
+    // 로그인 정보 유효성 검사용 데이터 보내기
     axios({
       method: 'post',
       url: `${BASE_URL}/accounts/login/`,
@@ -42,6 +43,7 @@ export const useAccountStore = defineStore('account', () => {
     .then(res => {
       console.log('로그인 성공')
       TOKEN.value = res.data.key
+      // 유저 정보를 가지고다니기 위해 유저정보 불러오기
       axios({
         method:'get',
         url: `${BASE_URL}/accounts/getuser/${username}/`,
@@ -51,6 +53,10 @@ export const useAccountStore = defineStore('account', () => {
       })
       .then(res => {
         userNow.value = res.data
+        // 유저가 로그인할 때, 예금, 적금정보 db에 저장하기
+        axios({
+          method
+        })
       })
       .catch(err => console.log(err))
       router.push({name: 'home'})
