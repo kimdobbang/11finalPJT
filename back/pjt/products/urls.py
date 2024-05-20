@@ -20,4 +20,10 @@ urlpatterns = [
     
     # [GET] 전체 적금 상품 옵션 조회
     path('get-installmentOption/', views.get_installmentOption),
+
+    # [POST] 정기예금 상품 가입
+    path('fixed/<str:username>/<int:product_id>/', views.join_fixed),
+
+    # [POST] 적금 상품 가입
+    path('installment/<str:username>/<int:product_id>/', views.join_installment),
 ]

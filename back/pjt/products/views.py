@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 import requests
 from rest_framework.decorators import api_view
@@ -7,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Fixed, FixedOption, Installment, InstallmentOption
 from .serializers import FixedSerializer, FixedOptionsSerializer, InstallmentSerializer, InstallmentOptionsSerializer
+from accounts.serializers import UserInfoSerializer
 
 # Create your views here.
 
@@ -173,3 +175,23 @@ def get_installmentOption(request):
         installmentoption = InstallmentOption.objects.all()
         serializer = InstallmentOptionsSerializer(installmentoption, many=True)
         return Response(serializer.data)
+    
+
+# [POST] 정기예금 상품 가입
+@api_view(['POST'])
+def join_fixed(request, username, product_id):
+    usermodel = get_user_model().objects.get(username=username)
+    fixed = Fixed.objects.get(id=product_id)
+    usermodel.fixed.add(fixed)
+    serializer = UserInfoSerializer(usermodel)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# [POST] 적금 상품 가입
+@api_view(['POST'])
+def join_installment(request, username, product_id):
+    usermodel = get_user_model().objects.get(username=username)
+    installment = Installment.objects.get(id=product_id)
+    usermodel.installment.add(installment)
+    serializer = UserInfoSerializer(usermodel)
+    return Response(serializer.data, status=status.HTTP_200_OK)
