@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import CommunityListItem from '@/components/CommunityListItem.vue';
+import CommunityListItem from '@/components/community/CommunityListItem.vue';
 import {ref} from 'vue'
 import { useRouter } from 'vue-router';
 

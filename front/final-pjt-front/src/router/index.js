@@ -10,11 +10,11 @@ import ProfileView from '@/views/ProfileView.vue'
 import RecommendView from '@/views/RecommendView.vue'
 
 // component import
-import AccountLoginForm from '@/components/AccountLoginForm.vue'
-import AccountSignupForm from '@/components/AccountSignupForm.vue'
-import ProductFixedList from '@/components/ProductFixedList.vue'
-import ProductInstallmentList from '@/components/ProductInstallmentList.vue'
-import CommunityListItemDetail from '@/components/CommunityListItemDetail.vue'
+import AccountLoginForm from '@/components/account/AccountLoginForm.vue'
+import AccountSignupForm from '@/components/account/AccountSignupForm.vue'
+import ProductFixedList from '@/components/product/ProductFixedList.vue'
+import ProductInstallmentList from '@/components/product/ProductInstallmentList.vue'
+import CommunityListItemDetail from '@/components/community/CommunityListItemDetail.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

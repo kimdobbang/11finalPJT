@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import CommunityList from '@/components/CommunityList.vue';
+import CommunityList from '@/components/community/CommunityList.vue';
 </script>
 
 <style scoped>

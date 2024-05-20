@@ -9,8 +9,8 @@
 </template>
 
 <script setup>
-import BankSearchForm from '@/components/BankSearchForm.vue';
-import BankMap from '@/components/BankMap.vue' ;
+import BankSearchForm from '@/components/bank/BankSearchForm.vue';
+import BankMap from '@/components/bank/BankMap.vue' ;
 </script>
 
 <style scoped>

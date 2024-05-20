@@ -7,8 +7,8 @@
 </template>
 
 <script setup>
-import ExchangeInfo from '@/components/ExchangeInfo.vue';
-import ExchangeCalculator from '@/components/ExchangeCalculator.vue';
+import ExchangeInfo from '@/components/exchange/ExchangeInfo.vue';
+import ExchangeCalculator from '@/components/exchange/ExchangeCalculator.vue';
 </script>
 
 <style scoped>

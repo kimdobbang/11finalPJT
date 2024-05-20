@@ -13,9 +13,9 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useStore } from '@/stores/store';
+import { useStore } from '@/stores/accountstore';
 
-const store = useStore()
+const store = useAccountStore()
 
 const username = ref(null)
 const password = ref(null)
