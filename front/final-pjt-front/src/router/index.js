@@ -14,7 +14,10 @@ import AccountLoginForm from '@/components/account/AccountLoginForm.vue'
 import AccountSignupForm from '@/components/account/AccountSignupForm.vue'
 import ProductFixedList from '@/components/product/ProductFixedList.vue'
 import ProductInstallmentList from '@/components/product/ProductInstallmentList.vue'
+import CommunityList from '@/components/community/CommunityList.vue'
 import CommunityListItemDetail from '@/components/community/CommunityListItemDetail.vue'
+import CommunityCreate from '@/components/community/CommunityCreate.vue'
+import CommunityUpdate from '@/components/community/CommunityUpdate.vue'
 
 // store import
 import { useAccountStore } from '@/stores/accountstore'
@@ -62,7 +65,9 @@ const router = createRouter({
       component: CommunityView,
       children: [
         {path: '' , name: 'communitylist', component: CommunityList},
-        {path: ':postId' , name: 'articledetail', component: CommunityListItemDetail},
+        {path: ':articleId' , name: 'articledetail', component: CommunityListItemDetail},
+        {path: 'articlecreate' , name: 'articlecreate', component: CommunityCreate},
+        {path: 'articleupdate' , name: 'articleupdate', component: CommunityUpdate},
       ]
     },
     {

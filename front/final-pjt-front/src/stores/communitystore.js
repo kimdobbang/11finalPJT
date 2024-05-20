@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useAccountStore } from '@/stores/accountstore'
 
-export const useCommunityStore = defineStore('store', () => {
+export const useCommunityStore = defineStore('community', () => {
   // 기본 URL 지정
   const BASE_URL = 'http://127.0.0.1:8000'
   // 토큰 정보 가져오기
@@ -19,7 +19,7 @@ export const useCommunityStore = defineStore('store', () => {
       method: 'get',
       url: `${BASE_URL}/articles/`,
       headers: {
-        Authorization: `Token ${TOKEN.value}`
+        Authorization: `Token ${TOKEN}`
       }
     })
     .then(res => {
@@ -27,5 +27,5 @@ export const useCommunityStore = defineStore('store', () => {
     })
     .catch(err => console.log(err))
   }
-  return { BASE_URL, TOKEN, getArticles }
+  return { BASE_URL, TOKEN, getArticles, articles }
 },{persist:true})

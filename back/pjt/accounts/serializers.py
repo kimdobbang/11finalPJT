@@ -56,3 +56,10 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
         model = UserModel
         fields = ('pk', *extra_fields)
         read_only_fields = ('email',)
+
+
+class UserInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserModel
+        fields = '__all__'
+        read_only_fields = ('email', 'fixed', 'installment')
