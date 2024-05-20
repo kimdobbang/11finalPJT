@@ -1,20 +1,16 @@
 <template>
   <li>
-    <h4 @click="postClick">{{ post.title }} - {{ post.content }}</h4>
+    <RouterLink :to="`/community/${articleId}`">{{ article.title }} - {{ article.content }}</RouterLink>
   </li>
 </template>
 
 <script setup>
 import {ref} from 'vue'
+import { RouterLink } from 'vue-router';
 const props = defineProps({
-  post: Object
+  article: Object
 })
-
-const emit = defineEmits(['clickPostEvent'])
-const postId = ref(props.post.id)
-const postClick = function () {
-  emit('clickPostEvent', postId.value)
-}
+const articleId = ref(props.article.id)
 
 </script>
 

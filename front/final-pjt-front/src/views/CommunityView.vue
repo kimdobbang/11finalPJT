@@ -3,7 +3,7 @@
     <h1>Community</h1>
   </div>  
   
-  <CommunityList />
+  <RouterView />
   <!-- 게시글 상세는 아직 미구현 -->
 </template>
 
