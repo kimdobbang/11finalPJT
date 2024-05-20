@@ -1,16 +1,18 @@
 <template>
   <li>
-    <RouterLink :to="`/community/${articleId}`">{{ article.title }} - {{ article.content }}</RouterLink>
+    <RouterLink
+    :to="{name:'articledetail', params:{articleId:article.id} }">
+    {{ article.title }} - {{ article.content }}</RouterLink>
   </li>
 </template>
 
 <script setup>
 import {ref} from 'vue'
 import { RouterLink } from 'vue-router';
-const props = defineProps({
+defineProps({
   article: Object
 })
-const articleId = ref(props.article.id)
+
 
 </script>
 

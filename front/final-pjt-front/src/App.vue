@@ -7,8 +7,8 @@
       <RouterLink :to="{name: 'bank'}">Find Bank</RouterLink> |
       <RouterLink :to="{name: 'exchange'}">Exchange</RouterLink> |
       <RouterLink :to="{name: 'community'}">Community</RouterLink> |
-      <RouterLink :to="{name: 'account'}" v-if="!accoutStore.TOKEN">Account</RouterLink>
-      <RouterLink :to="{name: 'account'}" v-if="accoutStore.TOKEN" @click="logoutEvent">Logout</RouterLink>
+      <RouterLink :to="{name: 'account'}" v-if="!accoutStore.isLogin">Account</RouterLink>
+      <RouterLink :to="{name: 'login'}" v-if="accoutStore.isLogin" @click="logoutEvent">Logout</RouterLink>
     </nav>
     <RouterView />
 
@@ -22,8 +22,8 @@ const accoutStore = useAccountStore()
 const router = useRouter()
 // 로그아웃 즉시 적용
 const logoutEvent = function () {
-  localStorage.removeItem('store')
-  router.push({name:'home'})
+  localStorage.removeItem('account')
+  router.go()
 }
 </script>
 

@@ -3,14 +3,15 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 
-export const useAccountStore = defineStore('store', () => {
+export const useAccountStore = defineStore('account', () => {
   // 기본 URL 지정
   const BASE_URL = 'http://127.0.0.1:8000'
   // 토큰 저장할 변수 지정
   const TOKEN = ref(null)
   // 라우터 변수 지정
   const router = useRouter()
-
+  // 현재 로그인 유저 정보 변수 지정
+  const userNow = ref({})
   // 회원가입
   const signUp = function (payload) {
     const { username, password1, password2, nickname, email, profileImg, age, money, salary } = payload
@@ -41,10 +42,22 @@ export const useAccountStore = defineStore('store', () => {
     .then(res => {
       console.log('로그인 성공')
       TOKEN.value = res.data.key
+      axios({
+        method:'get',
+        url: `${BASE_URL}/accounts/getuser/${username}/`,
+        headers: {
+          Authorization: `Token ${TOKEN.value}`
+        }
+      })
+      .then(res => {
+        userNow.value = res.data
+      })
+      .catch(err => console.log(err))
       router.push({name: 'home'})
     })
     .catch(err => console.log(err))
   }
+
   const isLogin = computed(() => {
     if (TOKEN.value === null) {
       return false
@@ -52,5 +65,5 @@ export const useAccountStore = defineStore('store', () => {
       return true
     }
   })
-  return { BASE_URL, TOKEN, signUp, logIn, isLogin }
+  return { BASE_URL, TOKEN, signUp, logIn, isLogin, userNow }
 },{persist:true})
