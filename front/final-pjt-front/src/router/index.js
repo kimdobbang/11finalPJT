@@ -15,7 +15,7 @@ import AccountSignupForm from '@/components/account/AccountSignupForm.vue'
 import ProductFixedList from '@/components/product/ProductFixedList.vue'
 import ProductInstallmentList from '@/components/product/ProductInstallmentList.vue'
 import CommunityListItemDetail from '@/components/community/CommunityListItemDetail.vue'
-
+import CommunityList from '@/components/community/CommunityList.vue'
 // store import
 import { useAccountStore } from '@/stores/accountstore'
 
