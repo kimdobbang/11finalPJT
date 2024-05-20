@@ -1,6 +1,6 @@
 <template>
   <li>
-    {{ product.fixed_name }}
+    {{ product.installment_name }}
   </li>
 </template>
 

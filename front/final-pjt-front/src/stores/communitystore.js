@@ -15,6 +15,7 @@ export const useCommunityStore = defineStore('community', () => {
 
   // 게시글 목록 받아오기
   const getArticles = function () {
+    console.log(TOKEN)
     axios({
       method: 'get',
       url: `${BASE_URL}/articles/`,

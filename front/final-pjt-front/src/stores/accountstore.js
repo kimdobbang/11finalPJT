@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { useProductStore } from '@/stores/productstore'
 
 export const useAccountStore = defineStore('account', () => {
   // 기본 URL 지정
@@ -12,6 +13,8 @@ export const useAccountStore = defineStore('account', () => {
   const router = useRouter()
   // 현재 로그인 유저 정보 변수 지정
   const userNow = ref({})
+  // 상품 목록 전달용 변수 지정
+  const productStore = useProductStore()
   // 회원가입
   const signUp = function (payload) {
     const { username, password1, password2, nickname, email, profileImg, age, money, salary } = payload
@@ -54,9 +57,7 @@ export const useAccountStore = defineStore('account', () => {
       .then(res => {
         userNow.value = res.data
         // 유저가 로그인할 때, 예금, 적금정보 db에 저장하기
-        axios({
-          method
-        })
+        productStore.saveProduct()
       })
       .catch(err => console.log(err))
       router.push({name: 'home'})
