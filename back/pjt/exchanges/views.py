@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Exchange
 from .serializers import ExchangeSerializer
+from decimal import Decimal, ROUND_DOWN
 # Create your views here.
 
 api_key = settings.EX_API_KEY
@@ -20,19 +21,27 @@ def save_exchange(request):
     response = requests.get(url).json()
     
     # 각 국가 환율을 순회하며 저장
-    for dic in response:
-        CUR_UNIT = dic['cur_unit']
-        CUR_NM = dic['cur_nm']
-        TTB = dic['ttb']
-        TTS = dic['tts']
-        DEAL_BAS_R = dic['deal_bas_r']
+    for info in response:
+        cur_unit = info.get('cur_unit')
+        cur_nm = info.get('cur_nm')
+        ttb = info.get('ttb')
+        tts = info.get('tts')
+        deal_bas_r = info.get('deal_bas_r')
+        
+        # 'JPY(100)'과 'IDR(100)'을 각각 'JPY'와 'IDR'로 변경
+        if cur_unit == 'JPY(100)' or cur_unit == 'IDR(100)':
+            cur_unit = cur_unit.split('(')[0]  # 'JPY(100)' -> 'JPY'
+             # TTB, TTS, DEAL_BAS_R 값을 100으로 나누고 소수점 아래 두 자리까지 반올림
+            ttb = (Decimal(ttb) / 100).quantize(Decimal('0.0001'), rounding=ROUND_DOWN) if ttb else None
+            tts = (Decimal(tts) / 100).quantize(Decimal('0.0001'), rounding=ROUND_DOWN) if tts else None
+            deal_bas_r = (Decimal(deal_bas_r) / 100).quantize(Decimal('0.0001'), rounding=ROUND_DOWN) if deal_bas_r else None
 
         save_data = {
-            'CUR_UNIT': CUR_UNIT,
-            'CUR_NM': CUR_NM,
-            'TTB': TTB,
-            'TTS': TTS,
-            'DEAL_BAS_R': DEAL_BAS_R
+            'CUR_UNIT': cur_unit,
+            'CUR_NM': cur_nm,
+            'TTB': str(ttb),
+            'TTS': str(tts),
+            'DEAL_BAS_R': str(deal_bas_r)
         }
 
         serializer = ExchangeSerializer(data=save_data)
