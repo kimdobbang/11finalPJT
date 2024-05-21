@@ -13,6 +13,7 @@ import RecommendView from '@/views/RecommendView.vue'
 import AccountLoginForm from '@/components/account/AccountLoginForm.vue'
 import AccountSignupForm from '@/components/account/AccountSignupForm.vue'
 import ProductFixedList from '@/components/product/ProductFixedList.vue'
+import ProductFixedListItemDetail from '@/components/product/ProductFixedListItemDetail.vue'
 import ProductInstallmentList from '@/components/product/ProductInstallmentList.vue'
 import CommunityList from '@/components/community/CommunityList.vue'
 import CommunityListItemDetail from '@/components/community/CommunityListItemDetail.vue'
@@ -46,6 +47,7 @@ const router = createRouter({
       component: ProductView,
       children: [
         {path: 'fixed' , name: 'fixed', component: ProductFixedList},
+        {path: 'fixed/:fixedId' , name: 'fixeddetail', component: ProductFixedListItemDetail},
         {path: 'installment' , name: 'installment', component: ProductInstallmentList},
       ]
     },

@@ -259,7 +259,7 @@
           "active": false,
           "left": 776.6666,
           "top": 649.0002,
-          "zIndex": 5,
+          "zIndex": 10,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9C27B0"
