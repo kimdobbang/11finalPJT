@@ -10,6 +10,10 @@ from .models import Fixed, FixedOption, Installment, InstallmentOption
 from .serializers import FixedSerializer, FixedOptionsSerializer, InstallmentSerializer, InstallmentOptionsSerializer
 from accounts.serializers import UserInfoSerializer
 
+# permission Decorators
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+
 # Create your views here.
 
 api_key = settings.API_KEY
@@ -17,6 +21,7 @@ api_key = settings.API_KEY
 # ----------- 저장 -----------
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def save_fixed(request):
     ## (1) 1금융권 상품 목록 저장
     url = f'http://finlife.fss.or.kr/finlifeapi/depositProductsSearch.json?auth={api_key}&topFinGrpNo=020000&pageNo=1'
@@ -164,6 +169,7 @@ def save_fixed(request):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def save_installment(request):
     ## (1) 1금융권 상품 목록 저장
     url = f'http://finlife.fss.or.kr/finlifeapi/savingProductsSearch.json?auth={api_key}&topFinGrpNo=020000&pageNo=1'
@@ -318,7 +324,8 @@ def save_installment(request):
 # ----------- 조회 -----------
 
 # [GET] 전체 정기예금 상품 조회
-@api_view(['GET']) 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_fixed(request):
     if request.method == 'GET':
         fixed = Fixed.objects.all()
@@ -326,7 +333,8 @@ def get_fixed(request):
         return Response(serializer.data)
     
 # [GET] 전체 정기예금 상품 옵션 조회
-@api_view(['GET']) 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_fixedOption(request):
     if request.method == 'GET':
         fixedoption = FixedOption.objects.all()
@@ -334,7 +342,8 @@ def get_fixedOption(request):
         return Response(serializer.data)
     
 # [GET] 전체 적금 상품 조회
-@api_view(['GET']) 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_installment(request):
     if request.method == 'GET':
         installment = Installment.objects.all()
@@ -342,7 +351,8 @@ def get_installment(request):
         return Response(serializer.data)    
 
 # [GET] 전체 적금 상품 옵션 조회
-@api_view(['GET']) 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_installmentOption(request):
     if request.method == 'GET':
         installmentoption = InstallmentOption.objects.all()
@@ -352,6 +362,7 @@ def get_installmentOption(request):
     
 # [GET] 단일 정기예금 상품 상세조회 (product_id와 fixed_id 중 어느게 프론트가 편할지 회의)
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def detail_fixed(request, product_id):
     fixed = get_object_or_404(Fixed, id=product_id)
     serializer = FixedSerializer(fixed)
@@ -360,29 +371,46 @@ def detail_fixed(request, product_id):
 
 # [GET] 단일 정기적금 상품 상세조회
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def detail_installment(request, product_id):
     installment = get_object_or_404(Installment, id=product_id)
     serializer = InstallmentSerializer(installment)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# ----------- 상품가입 -----------
+# ----------- 상품 가입 및 탈퇴 -----------
 
-# [POST] 정기예금 상품 가입
-@api_view(['POST'])
+# [POST] 정기예금 상품 가입 및 탈퇴
+@api_view(['POST','DELETE'])
+@permission_classes([IsAuthenticated])
 def join_fixed(request, username, product_id):
     usermodel = get_user_model().objects.get(username=username)
     fixed = Fixed.objects.get(id=product_id)
-    usermodel.fixed.add(fixed)
-    serializer = UserInfoSerializer(usermodel)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    if request.method == 'POST':
+        usermodel.fixed.add(fixed)
+        serializer = UserInfoSerializer(usermodel)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    elif request.method == 'DELETE':
+        usermodel.fixed.remove(fixed)
+        serializer = UserInfoSerializer(usermodel)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# [POST] 적금 상품 가입
-@api_view(['POST'])
+# [POST] 적금 상품 가입 및 탈퇴
+@api_view(['POST','DELETE'])
+@permission_classes([IsAuthenticated])
 def join_installment(request, username, product_id):
     usermodel = get_user_model().objects.get(username=username)
     installment = Installment.objects.get(id=product_id)
-    usermodel.installment.add(installment)
-    serializer = UserInfoSerializer(usermodel)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    if request.method == 'POST':
+        usermodel.installment.add(installment)
+        serializer = UserInfoSerializer(usermodel)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'DELETE':
+        usermodel.installment.remove(installment)
+        serializer = UserInfoSerializer(usermodel)
+        return Response(serializer.data, status=status.HTTP_200_OK)

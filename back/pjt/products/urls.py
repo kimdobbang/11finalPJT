@@ -34,11 +34,13 @@ urlpatterns = [
     path('installment/<int:product_id>/', views.detail_installment),
     
 
-    # ----------- 상품가입 -----------
+    # ----------- 상품 가입 및 탈퇴 -----------
     
     # [POST] 정기예금 상품 가입
+    # [DELETE] 정기예금 상품 탈퇴
     path('fixed/<str:username>/<int:product_id>/', views.join_fixed),
 
     # [POST] 정기적금 상품 가입
+    # [DELETE] 정기적금 상품 탈퇴
     path('installment/<str:username>/<int:product_id>/', views.join_installment),
 ]
