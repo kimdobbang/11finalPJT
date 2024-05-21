@@ -15,23 +15,6 @@ export const useAccountStore = defineStore('account', () => {
   const userNow = ref({})
   // 상품 목록 전달용 변수 지정
   const productStore = useProductStore()
-  // 회원가입
-  const signUp = function (payload) {
-    const { username, password1, password2, nickname, email, profileImg, age, money, salary } = payload
-    axios({
-      method: 'post',
-      url: `${BASE_URL}/accounts/join/`,
-      data: {
-        username, password1, password2, nickname, email, profileImg, age, money, salary
-      }
-    })
-    .then(res => {
-      console.log('회원가입 성공')
-      TOKEN.value = res.data.key
-      router.push({name: 'home'})
-    })
-    .catch(err => console.log(err))
-  }
   // 로그인
   const logIn = function (payload) {
     const { username, password } = payload
@@ -61,6 +44,24 @@ export const useAccountStore = defineStore('account', () => {
       })
       .catch(err => console.log(err))
       router.push({name: 'home'})
+    })
+    .catch(err => console.log(err))
+  }
+  // 회원가입
+  const signUp = function (payload) {
+    const { username, password1, password2, nickname, email, profileImg, age, money, salary } = payload
+    axios({
+      method: 'post',
+      url: `${BASE_URL}/accounts/join/`,
+      data: {
+        username, password1, password2, nickname, email, profileImg, age, money, salary
+      }
+    })
+    .then(res => {
+      console.log('회원가입 성공')
+      console.log(res.data)
+      TOKEN.value = res.data.key
+      logIn({username: username, password: password2})
     })
     .catch(err => console.log(err))
   }

@@ -26,6 +26,9 @@ class FixedOption(models.Model):
 
 
 class Installment(models.Model):
+    fin_grp_no = models.IntegerField(null=True) # 금융기관 종류(1:1금융권, 2:저축은행)
+    fin_co_no = models.CharField(max_length=50, null=True)  # 금융회사 코드
+    kor_co_nm = models.CharField(max_length=50, null=True)  # 금융회사명
     installment_code = models.CharField(max_length=50, unique=True, null=True)    # 상품 코드
     installment_name = models.CharField(max_length=50, null=True)    # 상품 이름
     dcls_month = models.CharField(max_length=50, null=True)    # 공시 제출월(YYYYMM)
