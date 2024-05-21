@@ -8,9 +8,9 @@
 </template>
 
 <script setup>
-import { onMounted, ref, toRaw } from 'vue'
-let map = null;
+import { onMounted, ref, watch, toRaw } from 'vue'
 
+let map = null
 const initMap = function () {
   let myCenter = new kakao.maps.LatLng(33.450701, 126.570667); //카카오본사
   if (navigator.geolocation) {
@@ -25,7 +25,6 @@ const initMap = function () {
       map.setCenter(myCenter)
     })
   }
-
   const container = document.getElementById('map')
 
   const options = {
@@ -43,12 +42,6 @@ const initMap = function () {
   // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
   const zoomControl = new kakao.maps.ZoomControl()
   map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
-
-  // 장소 검색 객체를 생성합니다
-  const ps = new kakao.maps.services.Places()
-
-  // 키워드로 장소를 검색합니다
-  ps.keywordSearch('이태원 맛집', placesSearchCB)
 }
 
 onMounted(() => {
@@ -64,39 +57,45 @@ onMounted(() => {
   }
 });
 
-const myMarkerPosition = ref([[33.450701, 126.570667],[33.600701, 126.900667]])
 
-const markers = ref([])
+//============시작
+//로직 구현
+const keyword =ref('')
+const markers = []
 
-//마커지우기
-const displayMarker = function (markerPositions) {
-  if (markers.value.length > 0) {
-    markers.value.forEach((marker) => marker.setMap(null))
-  }
 
-  const positions = markerPositions.map(
-    (position) => new kakao.maps.LatLng(...position)
-  )
-  if (positions.length > 0) {
-    markers.value = positions.map(
-      (position) =>
-        new kakao.maps.Marker({
-          map: toRaw(map),
-          position,
-        })
-    );
 
-    const bounds = positions.reduce(
-      (bounds, latlng) => bounds.extend(latlng),
-      new kakao.maps.LatLngBounds()
-    )
 
-    toRaw(map).setBounds(bounds);
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//=============끝
+
+
 
 
 </script>
+
+
+
+
+
+
 
 <style scoped>
 #map {
