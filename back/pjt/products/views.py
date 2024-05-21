@@ -18,14 +18,16 @@ api_key = settings.API_KEY
 
 @api_view(['GET'])
 def save_fixed(request):
+    ## (1) 1금융권 상품 목록 저장
     url = f'http://finlife.fss.or.kr/finlifeapi/depositProductsSearch.json?auth={api_key}&topFinGrpNo=020000&pageNo=1'
 
     # API 데이터 조회하여 request 객체 생성
     response = requests.get(url).json()
     
-    # (1) 상품 목록 저장
     # Fixed 정기예금 상품 목록을 순회하며 저장
     for dic in response.get('result').get('baseList'):
+        fin_co_no = dic['fin_co_no']
+        kor_co_nm = dic['kor_co_nm']
         fixed_code = dic['fin_prdt_cd']
         fixed_name = dic['fin_prdt_nm']
         dcls_month = dic['dcls_month']
@@ -38,6 +40,9 @@ def save_fixed(request):
         max_limit = dic['max_limit']
 
         save_data = {
+            'fin_grp_no': 1,
+            'fin_co_no': fin_co_no,
+            'kor_co_nm': kor_co_nm,
             'fixed_code': fixed_code,
             'fixed_name': fixed_name,
             'dcls_month': dcls_month,
@@ -49,6 +54,11 @@ def save_fixed(request):
             'etc_note': etc_note,
             'max_limit': max_limit
         }
+        
+        # 중복 저장 방지
+        if Fixed.objects.filter(kor_co_nm=kor_co_nm, fixed_code=fixed_code).exists():
+            return JsonResponse({'message' : 'Data already stored'})
+            
         # 직렬화 및 유효성검사 후 저장
         serializer = FixedSerializer(data=save_data)
 
@@ -58,6 +68,7 @@ def save_fixed(request):
     # FixedOption 정기예금 상품 옵션 목록을 순회하며 저장
     for dic in response.get('result').get('optionList'):
         fin_prdt_cd = dic['fin_prdt_cd']
+        fin_co_no = dic['fin_co_no']
         intr_rate_type_nm = dic['intr_rate_type_nm']
         save_trm = dic['save_trm']
         intr_rate = dic['intr_rate']
@@ -71,24 +82,99 @@ def save_fixed(request):
         }
 
         # 옵션의 외래키는 api response에서 가져올 수 없으므로 직접 입력한다.
-        product = Fixed.objects.get(fixed_code=fin_prdt_cd)  # 외래키가 참조하는 상품 조회
+        product = Fixed.objects.get(fixed_code=fin_prdt_cd, fin_co_no=fin_co_no )  # 외래키가 참조하는 상품 조회
         serializer = FixedOptionsSerializer(data=save_data)
         
         if serializer.is_valid(raise_exception=True):
             serializer.save(product=product)    # 저장하는 과정에서 외래키를 입력
+
+
+    ## (2) 저축은행 상품 목록 저장
+    for num in range(1, 5):
+        url = f'http://finlife.fss.or.kr/finlifeapi/depositProductsSearch.json?auth={api_key}&topFinGrpNo=030300&pageNo={num}'
+
+        # API 데이터 조회하여 request 객체 생성
+        response = requests.get(url).json()
+        
+        # Fixed 정기예금 상품 목록을 순회하며 저장
+        for dic in response.get('result').get('baseList'):
+            fin_co_no = dic['fin_co_no']
+            kor_co_nm = dic['kor_co_nm']
+            fixed_code = dic['fin_prdt_cd']
+            fixed_name = dic['fin_prdt_nm']
+            dcls_month = dic['dcls_month']
+            join_way = dic['join_way']
+            mtrt_int = dic['mtrt_int']
+            spcl_cnd = dic['spcl_cnd']
+            join_deny = dic['join_deny']
+            join_member = dic['join_member']
+            etc_note = dic['etc_note']
+            max_limit = dic['max_limit']
+
+            save_data = {
+                'fin_grp_no': 2,
+                'fin_co_no': fin_co_no,
+                'kor_co_nm': kor_co_nm,
+                'fixed_code': fixed_code,
+                'fixed_name': fixed_name,
+                'dcls_month': dcls_month,
+                'join_way': join_way,
+                'mtrt_int': mtrt_int,
+                'spcl_cnd': spcl_cnd,
+                'join_deny': join_deny,
+                'join_member': join_member,
+                'etc_note': etc_note,
+                'max_limit': max_limit
+            }
+            
+            # 중복 저장 방지
+            if Fixed.objects.filter(kor_co_nm=kor_co_nm, fixed_code=fixed_code).exists():
+                return JsonResponse({'message' : 'Data already stored'})
+                
+            # 직렬화 및 유효성검사 후 저장
+            serializer = FixedSerializer(data=save_data)
+
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+
+        # FixedOption 정기예금 상품 옵션 목록을 순회하며 저장
+        for dic in response.get('result').get('optionList'):
+            fin_prdt_cd = dic['fin_prdt_cd']
+            fin_co_no = dic['fin_co_no']
+            intr_rate_type_nm = dic['intr_rate_type_nm']
+            save_trm = dic['save_trm']
+            intr_rate = dic['intr_rate']
+            intr_rate2 = dic['intr_rate2']
+
+            save_data = {
+                'intr_rate_type_nm': intr_rate_type_nm,
+                'save_trm': save_trm,
+                'intr_rate': intr_rate,
+                'intr_rate2': intr_rate2,
+            }
+
+            # 옵션의 외래키는 api response에서 가져올 수 없으므로 직접 입력한다.
+            product = Fixed.objects.get(fixed_code=fin_prdt_cd, fin_co_no=fin_co_no)  # 외래키가 참조하는 상품 조회
+            serializer = FixedOptionsSerializer(data=save_data)
+            
+            if serializer.is_valid(raise_exception=True):
+                serializer.save(product=product)    # 저장하는 과정에서 외래키를 입력
 
     return JsonResponse({'message' : 'save Fixed complete!'})
 
 
 @api_view(['GET'])
 def save_installment(request):
+    ## (1) 1금융권 상품 목록 저장
     url = f'http://finlife.fss.or.kr/finlifeapi/savingProductsSearch.json?auth={api_key}&topFinGrpNo=020000&pageNo=1'
 
     # API 데이터 조회
     response = requests.get(url).json()
     
-    # 적금 상품 목록을 순회하며 저장
+    # Installment 적금 상품 목록을 순회하며 저장
     for dic in response.get('result').get('baseList'):
+        fin_co_no = dic['fin_co_no']
+        kor_co_nm = dic['kor_co_nm']
         installment_code = dic['fin_prdt_cd']
         installment_name = dic['fin_prdt_nm']
         dcls_month = dic['dcls_month']
@@ -101,6 +187,9 @@ def save_installment(request):
         max_limit = dic['max_limit']
 
         save_data = {
+            'fin_grp_no': 1,
+            'fin_co_no': fin_co_no,
+            'kor_co_nm': kor_co_nm,
             'installment_code': installment_code,
             'installment_name': installment_name,
             'dcls_month': dcls_month,
@@ -112,34 +201,116 @@ def save_installment(request):
             'etc_note': etc_note,
             'max_limit': max_limit
         }
+        
+        # 중복 저장 방지
+        if Installment.objects.filter(kor_co_nm=kor_co_nm, installment_code=installment_code).exists():
+            return JsonResponse({'message' : 'Data already stored'})
+            
         # 직렬화 및 유효성검사 후 저장
         serializer = InstallmentSerializer(data=save_data)
+
         if serializer.is_valid(raise_exception=True):
             serializer.save()
 
-    # 적금 상품 옵션 목록을 순회하며 저장
+    # InstallmentOption 적금 상품 옵션 목록을 순회하며 저장
     for dic in response.get('result').get('optionList'):
         fin_prdt_cd = dic['fin_prdt_cd']
+        fin_co_no = dic['fin_co_no']
         intr_rate_type_nm = dic['intr_rate_type_nm']
-        rsrv_type_nm = dic['rsrv_type_nm']
         save_trm = dic['save_trm']
         intr_rate = dic['intr_rate']
         intr_rate2 = dic['intr_rate2']
+        rsrv_type_nm = dic['rsrv_type_nm']
 
         save_data = {
             'intr_rate_type_nm': intr_rate_type_nm,
-            'rsrv_type_nm': rsrv_type_nm,
             'save_trm': save_trm,
             'intr_rate': intr_rate,
             'intr_rate2': intr_rate2,
+            'rsrv_type_nm': rsrv_type_nm
         }
 
-        # 옵션의 외래키는 api response 데이터에서 가져올 수 없으므로 직접 입력
-        product = Installment.objects.get(installment_code=fin_prdt_cd)  #외래키가 참조하는 상품 조회
+        # 옵션의 외래키는 api response에서 가져올 수 없으므로 직접 입력한다.
+        product = Installment.objects.get(installment_code=fin_prdt_cd, fin_co_no=fin_co_no )  # 외래키가 참조하는 상품 조회
         serializer = InstallmentOptionsSerializer(data=save_data)
         
         if serializer.is_valid(raise_exception=True):
             serializer.save(product=product)    # 저장하는 과정에서 외래키를 입력
+            
+    
+    
+    ## (2) 저축은행 상품 목록 저장
+    for num in range(1, 5):
+        url = f'http://finlife.fss.or.kr/finlifeapi/savingProductsSearch.json?auth={api_key}&topFinGrpNo=030300&pageNo={num}'
+
+        # API 데이터 조회하여 request 객체 생성
+        response = requests.get(url).json()
+        
+        # Installment 적금 상품 목록을 순회하며 저장
+        for dic in response.get('result').get('baseList'):
+            fin_co_no = dic['fin_co_no']
+            kor_co_nm = dic['kor_co_nm']
+            installment_code = dic['fin_prdt_cd']
+            installment_name = dic['fin_prdt_nm']
+            dcls_month = dic['dcls_month']
+            join_way = dic['join_way']
+            mtrt_int = dic['mtrt_int']
+            spcl_cnd = dic['spcl_cnd']
+            join_deny = dic['join_deny']
+            join_member = dic['join_member']
+            etc_note = dic['etc_note']
+            max_limit = dic['max_limit']
+
+            save_data = {
+                'fin_grp_no': 2,
+                'fin_co_no': fin_co_no,
+                'kor_co_nm': kor_co_nm,
+                'installment_code': installment_code,
+                'installment_name': installment_name,
+                'dcls_month': dcls_month,
+                'join_way': join_way,
+                'mtrt_int': mtrt_int,
+                'spcl_cnd': spcl_cnd,
+                'join_deny': join_deny,
+                'join_member': join_member,
+                'etc_note': etc_note,
+                'max_limit': max_limit
+            }
+            
+            # 중복 저장 방지
+            if Installment.objects.filter(kor_co_nm=kor_co_nm, installment_code=installment_code).exists():
+                return JsonResponse({'message' : 'Data already stored'})
+                
+            # 직렬화 및 유효성검사 후 저장
+            serializer = InstallmentSerializer(data=save_data)
+
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+
+        # InstallmentOption 적금 상품 옵션 목록을 순회하며 저장
+        for dic in response.get('result').get('optionList'):
+            fin_prdt_cd = dic['fin_prdt_cd']
+            fin_co_no = dic['fin_co_no']
+            intr_rate_type_nm = dic['intr_rate_type_nm']
+            save_trm = dic['save_trm']
+            intr_rate = dic['intr_rate']
+            intr_rate2 = dic['intr_rate2']
+            rsrv_type_nm = dic['rsrv_type_nm']
+
+            save_data = {
+                'intr_rate_type_nm': intr_rate_type_nm,
+                'save_trm': save_trm,
+                'intr_rate': intr_rate,
+                'intr_rate2': intr_rate2,
+                'rsrv_type_nm': rsrv_type_nm
+            }
+
+            # 옵션의 외래키는 api response에서 가져올 수 없으므로 직접 입력한다.
+            product = Installment.objects.get(installment_code=fin_prdt_cd, fin_co_no=fin_co_no)  # 외래키가 참조하는 상품 조회
+            serializer = InstallmentOptionsSerializer(data=save_data)
+            
+            if serializer.is_valid(raise_exception=True):
+                serializer.save(product=product)    # 저장하는 과정에서 외래키를 입력
 
     return JsonResponse({'message' : 'save Installment complete!'})
 
