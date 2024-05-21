@@ -15,6 +15,7 @@ import AccountSignupForm from '@/components/account/AccountSignupForm.vue'
 import ProductFixedList from '@/components/product/ProductFixedList.vue'
 import ProductFixedListItemDetail from '@/components/product/ProductFixedListItemDetail.vue'
 import ProductInstallmentList from '@/components/product/ProductInstallmentList.vue'
+import ProductInstallmentListItemDetail from '@/components/product/ProductInstallmentListItemDetail.vue'
 import CommunityList from '@/components/community/CommunityList.vue'
 import CommunityListItemDetail from '@/components/community/CommunityListItemDetail.vue'
 import CommunityCreate from '@/components/community/CommunityCreate.vue'
@@ -22,6 +23,7 @@ import CommunityUpdate from '@/components/community/CommunityUpdate.vue'
 
 // store import
 import { useAccountStore } from '@/stores/accountstore'
+import ProductInstallmentListItem from '@/components/product/ProductInstallmentListItem.vue'
 
 
 const router = createRouter({
@@ -49,6 +51,7 @@ const router = createRouter({
         {path: 'fixed' , name: 'fixed', component: ProductFixedList},
         {path: 'fixed/:fixedId' , name: 'fixeddetail', component: ProductFixedListItemDetail},
         {path: 'installment' , name: 'installment', component: ProductInstallmentList},
+        {path: 'installment/:installmentId' , name: 'installmentdetail', component: ProductInstallmentListItemDetail},
       ]
     },
     {

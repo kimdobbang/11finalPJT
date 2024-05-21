@@ -33,20 +33,6 @@ const productStore = useProductStore()
 const productList = ref([])
 const productInfo = ref({})
 
-
-// 표 정렬
-// import { SortTable } from "./sort";
- 
-// const SORT = new SortTable();
- 
-// window.addEventListener('click',(e)=>{
-//   const target = e.target;
-//   if(target.dataset.sort){
-//     SORT.onClick(target);
-//   }
-// });
-
-
 onMounted(() => {
   productStore.getFixed()
   productList.value = productStore.fixedList

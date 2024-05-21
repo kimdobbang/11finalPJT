@@ -59,7 +59,6 @@ export const useProductStore = defineStore('product', () => {
       }
     })
     .then(res => {
-      console.log(res.data)
       fixedList.value = res.data
      //예금 옵션 받아오기
      axios({
