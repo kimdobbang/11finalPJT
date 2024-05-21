@@ -82,7 +82,7 @@ export const useProductStore = defineStore('product', () => {
       method: 'get',
       url: `${BASE_URL}/products/get-installment/`,
       headers: {
-        Authorization: `Token ${accountStore.TOKEN}`
+        Authorization: `Token ${accountStore}`
       }
     })
     .then(res => {
