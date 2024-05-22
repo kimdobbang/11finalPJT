@@ -1,20 +1,21 @@
 <template>
   <div>
     <form @submit.prevent="handleSubmit">
-      <label for="metropolitan">시 / 도:</label>
+      <label for="metropolitan">은행 찾아보기 </label>
       <select v-model="selectedMetropolitan" @change="updateDistricts" id="metropolitan">
-        <option value="" selected disabled>선택안함</option>
+        <option value="" selected disabled>행정구역</option>
         <option v-for="(name, key) in Divisions" :key="key" :value="key">{{ name }}</option>
       </select>
 
       <label v-if="selectedMetropolitan" for="district">행정구역:</label>
       <select v-if="selectedMetropolitan" v-model="selectedDistrict" id="district">
-        <option value="" selected disabled>선택안함</option>
+        <option value="" selected disabled>시/군/구</option>
         <option v-for="district in districts" :key="district">{{ district }}</option>
       </select>
 
-      <label for="options">은행:</label>
-      <select v-model="selectedBank" id="options" name="options">
+      <label v-if="selectedDistrict" for="options">은행:</label>
+      <select v-if="selectedDistrict" v-model="selectedBank" id="options" name="options">
+        <option value="" selected disabled>은행</option>
         <option value="국민은행">국민은행</option>
         <option value="신한은행">신한은행</option>
         <option value="우리은행">우리은행</option>
@@ -22,7 +23,7 @@
         <option value="농협은행">농협은행</option>
         <option value="대구은행">대구은행</option>
       </select>
-      <input type="submit" value="검색">
+      <input type="submit" value="찾기 !">
     </form>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BankSearchForm @update="updateKeyword" :keyword="keyword" />
+    <BankSearchForm @update:keyword="updateKeyword" />
     <BankMap :keyword="keyword" />
   </div>
 </template>
