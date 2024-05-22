@@ -1,0 +1,17 @@
+덤프데이터 내용:  
+- 유저 4명(아래 로그인 정보 확인)
+- 유저별 게시글 1개,  
+- 게시글 별 댓글 2개(test를 위해 서로 다른 유저), 
+- 환율정보(24.05.22 10am 기준)
+- 예금상품(24.05.22 1am)
+- 예금옵션(24.05.22 1am)
+- 적금상품(24.05.22 1am)
+- 적금옵션(24.05.22 1am)
+
+[accounts] - 테스트시 활용
+김도이 kimdoi     ssafy1234  Token 3afa6c892576142750f5cd2d9f6dc4c31de1eb8b
+김도삼 kimdosam ssafy1234 Token 77df571b8683e6954310752f56df1965e405f0fa
+김도사 kimdosa    ssafy1234 Token 4c7ec081f76301f1fd3ed91c564cfd7639c520a2
+김도오 kimdoe     ssafy1234 Token 17e1c8d30122526dcc98302caa40bcb241221e41
+
+토큰 저장위치:  DB의 authtoken_token
