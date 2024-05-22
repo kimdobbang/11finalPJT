@@ -5,25 +5,33 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 
+# permission Decorators
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+
 # Create your views here.
-@api_view(['GET']) 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getuser(request ,username):
     usermodel = get_user_model().objects.get(username=username)
     serializer = UserInfoSerializer(usermodel)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(['GET']) 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def allusers(request ,username):
     usermodel = get_user_model().objects.all()
     serializer = UserInfoSerializer(usermodel, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(['GET']) 
+@api_view(['GET'])
 def makeusers(request):
     # 랜덤한 더미 데이터를 만드는 파일입니다.
     # 반드시 금융 상품 데이터를 DB에 저장한 후에 진행할 것
+    # 그래야 회원들이 가입한 상품이 정상적으로 필드에게 들어갈 수 있다.
+    # 회원 더미 데이터 생성 후에는 python manage.py loaddata user_data.json 입력
     from products.models import Fixed
     from products.models import Installment
     from django.contrib.auth import get_user_model
@@ -64,7 +72,7 @@ def makeusers(request):
     file = OrderedDict()
 
     username_list = []
-    N = 200
+    N = 10000
     i = 0
 
     while i < N:
@@ -96,7 +104,7 @@ def makeusers(request):
                         random.choice(installment_list).id
                         for _ in range(random.randint(0, 5))
                     ], # 금융 상품 적금 리스트
-                'age': random.randint(1, 100),  # 나이
+                'age': random.randint(12, 100),  # 나이
                 'money': random.randrange(0, 100000000, 100000),  # 현재 가진 금액
                 'salary': random.randrange(0, 1500000000, 1000000),  # 연봉
                 'password': '1234',
