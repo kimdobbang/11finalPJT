@@ -40,7 +40,7 @@ export const useAccountStore = defineStore('account', () => {
       .then(res => {
         userNow.value = res.data
         // 유저가 로그인할 때, 예금, 적금정보 db에 저장하기
-        productStore.saveProduct()
+        productStore.saveProduct()      
       })
       .catch(err => console.log(err))
       router.push({name: 'home'})

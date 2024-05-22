@@ -45,8 +45,13 @@ export const useProductStore = defineStore('product', () => {
     })
     .then(res => {
       console.log('Installment Save Complete!')
+      alert('로그인 시 진행한 예/적금 불러오기가 완료되었습니다!')  
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      alert('로그인 시 진행한 예/적금 불러오기에 오류가 발생되었습니다. 로그아웃 후 다시 로그인해주세요')  
+      
+  })
   }
 
   // 예금 목록 받아오기

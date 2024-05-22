@@ -2,17 +2,17 @@
   <tr>
     <!-- 상품 정보 표시 -->
     <td>{{ product.dcls_month }}</td>
-    <td>{{ product.installment_code }}</td>
+    <td>{{ product.kor_co_nm }}</td>
     <td>{{ product.installment_name }}</td>
     <!-- 옵션 금리 표시 -->
-    <td v-for="option in options">{{ option.intr_rate }}</td>
+    <td>{{ product }}</td>
     <td><button @click="productDetail">Detail</button></td>
   </tr>
 </template>
 
 <script setup>
 const props = defineProps({
-  product:Object
+  product:Object,
 })
 import { useProductStore } from '@/stores/productstore';
 import { onMounted, ref } from 'vue';
