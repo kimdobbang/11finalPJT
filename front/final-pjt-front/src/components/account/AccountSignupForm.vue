@@ -72,7 +72,6 @@ const signUpEvent = function () {
     money: money.value,
     salary: salary.value
   }
-  console.log(profileImg.value)
   store.signUp(payload)
 }
 </script>

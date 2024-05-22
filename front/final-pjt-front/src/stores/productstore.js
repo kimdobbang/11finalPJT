@@ -22,7 +22,6 @@ export const useProductStore = defineStore('product', () => {
     // 순서가 이상한가 봤더니, 순서는 안이상하고 오히려 community가 더 위에있는데도 잘됨.
     // 그 다음 then 으로 들어가는건데, 안됨
     // accountStore.TOKEN이라고 하면 잘 뽑힘
-    console.log(TOKEN)
     console.log(accountStore.TOKEN)
     axios({
       method: 'get',
