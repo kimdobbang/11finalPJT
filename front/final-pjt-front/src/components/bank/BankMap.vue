@@ -1,100 +1,71 @@
 <template>
-  <div>
-    <button @click="initMap">내위치</button>
-    <button @click="displayMarker(myMarkerPosition)">즐겨찾기 마커 표시(내근처로 바꿀거)</button>
-    <button @click="displayMarker([])">즐겨찾기 마커 해제</button>
-    <div id="map"></div>
-  </div>
+  <KakaoMap :lat="37.566826" :lng="126.9786567" @onLoadKakaoMap="onLoadKakaoMap">
+    <KakaoMapMarker
+      v-for="(marker, index) in markerList"
+      :key="marker.key === undefined ? index : marker.key"
+      :lat="marker.lat"
+      :lng="marker.lng"
+      :infoWindow="marker.infoWindow"
+      :clickable="true"
+      @onClickKakaoMapMarker="onClickMapMarker(marker)"
+    />
+  </KakaoMap>
 </template>
 
+
 <script setup>
-import { onMounted, ref, watch, toRaw } from 'vue'
+import { ref } from 'vue'
+import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps'
 
-let map = null
-const initMap = function () {
-  let myCenter = new kakao.maps.LatLng(33.450701, 126.570667); //카카오본사
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const lat = position.coords.latitude
-      const lon = position.coords.longitude
-      myCenter = new kakao.maps.LatLng(lat, lon)
-      new kakao.maps.Marker({
-        map,
-        position: myCenter,
-      });
-      map.setCenter(myCenter)
-    })
+//라이브러리 사용 방법을 반드시 참고하여 주시기 바랍니다.
+const map = ref()
+const markerList = ref([])
+const keyword = ref('')
+
+const onLoadKakaoMap = (mapRef, keyword) => {
+  map.value = mapRef
+
+  // 장소 검색 객체를 생성합니다
+  const ps = new kakao.maps.services.Places()
+  // 키워드로 장소를 검색합니다
+  // ps.keywordSearch(keyword, placesSearchCB)
+  ps.keywordSearch('대전광역시 유성구 신한은행', placesSearchCB)
+};
+
+// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+const placesSearchCB = (data, status) => {
+  if (status === kakao.maps.services.Status.OK) {
+    // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+    // LatLngBounds 객체에 좌표를 추가합니다
+    const bounds = new kakao.maps.LatLngBounds()
+
+    for (let marker of data) {
+      const markerItem = {
+        lat: marker.y,
+        lng: marker.x,
+        infoWindow: {
+          content: marker.place_name,
+          visible: false
+        }
+      };
+      markerList.value.push(markerItem);
+      bounds.extend(new kakao.maps.LatLng(Number(marker.y), Number(marker.x)));
+    }
+
+    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+    map.value?.setBounds(bounds);
   }
-  const container = document.getElementById('map')
+};
 
-  const options = {
-    center: myCenter,
-    level: 3,
-  }; // 지도 객체를 등록합니다.
-
-  map = new kakao.maps.Map(container, options)
-  // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-  const mapTypeControl = new kakao.maps.MapTypeControl()
-
-  // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-  map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT)
-
-  // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-  const zoomControl = new kakao.maps.ZoomControl()
-  map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
-}
-
-onMounted(() => {
-  if (window.kakao && window.kakao.maps) {
-    initMap();
+//마커 클릭 시 인포윈도우의 visible 값을 반전시킵니다
+const onClickMapMarker = (markerItem) => {
+  if (markerItem.infoWindow?.visible !== null && markerItem.infoWindow?.visible !== undefined) {
+    markerItem.infoWindow.visible = !markerItem.infoWindow.visible;
   } else {
-    const script = document.createElement('script'); // autoload=false 스크립트를 동적으로 로드하기 위해서 사용
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${import.meta.env.VITE_KAKAO_API_KEY}`
-    script.addEventListener('load', () => {
-      kakao.maps.load(initMap)
-    }); //헤드태그에 추가
-    document.head.appendChild(script)
+    markerItem.infoWindow.visible = true
   }
-});
-
-
-//============시작
-//로직 구현
-const keyword =ref('')
-const markers = []
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//=============끝
-
-
-
-
+};
 </script>
-
-
-
-
-
 
 
 <style scoped>

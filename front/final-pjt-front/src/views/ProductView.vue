@@ -10,7 +10,14 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterLink, RouterView, useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+
+const router = useRouter()
+
+onMounted(() => {
+  router.push({name:'fixed'})
+})
 </script>
 
 <style scoped>
