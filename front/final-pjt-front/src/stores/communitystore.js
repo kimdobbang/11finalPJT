@@ -24,7 +24,11 @@ export const useCommunityStore = defineStore('community', () => {
       }
     })
     .then(res => {
-      articles.value = res.data
+      if(res.data){
+        articles.value = res.data
+      } else {
+        console.log('emdfhrsdfjkl')
+      }
     })
     .catch(err => console.log(err))
   }

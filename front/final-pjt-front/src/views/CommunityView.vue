@@ -4,7 +4,7 @@
   </div>  
   
   <RouterView />
-  <!-- 게시글 상세는 아직 미구현 -->
+
 </template>
 
 <script setup>

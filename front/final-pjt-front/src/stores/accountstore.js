@@ -59,7 +59,6 @@ export const useAccountStore = defineStore('account', () => {
     })
     .then(res => {
       console.log('회원가입 성공')
-      console.log(res.data)
       TOKEN.value = res.data.key
       logIn({username: username, password: password2})
     })
