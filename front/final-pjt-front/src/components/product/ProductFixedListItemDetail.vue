@@ -1,15 +1,18 @@
 <template>
+  <div>
+    <RouterLink :to="{name:'fixed'}">[BACK]</RouterLink>
+  </div>
   <div v-if="product">
     <p>상품 코드 : {{ product.fixed_code }}</p>
     <p>상품 이름 : {{ product.fixed_name }}</p>
   </div>
-  <form @submit.prevent="joinOutProduct">
+  <form @submit="joinOutProduct">
     <input type="submit" v-model="userChange">
   </form>
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter, RouterLink } from 'vue-router';
 import { useProductStore } from '@/stores/productstore';
 import { useAccountStore } from '@/stores/accountstore';
 import { onMounted,ref,watch } from 'vue';
@@ -36,6 +39,8 @@ const joinOutProduct = function () {
     })
     .then(res => {
       console.log('가입 완료!')
+      console.log(`${product.value.fixed_name}`)
+      alert(`${product.value.fixed_name} 상품가입이 완료되었습니다!`)
       accountStore.userNow = res.data
     })
   } else {
