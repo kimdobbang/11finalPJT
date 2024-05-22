@@ -88,14 +88,14 @@ const router = createRouter({
     
   ]
 })
-router.beforeEach((to,from) =>{
-  const accountStore = useAccountStore()
-  if (to.name != 'home' && to.name != 'account' && to.name !='login' && to.name != 'signup' && !accountStore.isLogin) {
-    alert('Please Login')
-    return {name: 'account'}
-  } else if (to.name === 'account' && accountStore.isLogin) {
-    alert('Already Login')
-    return {name: 'home'}
-  }
-})
+// router.beforeEach((to,from) =>{
+//   const accountStore = useAccountStore()
+//   if (to.name != 'home' && to.name != 'account' && to.name !='login' && to.name != 'signup' && !accountStore.isLogin) {
+//     alert('Please Login')
+//     return {name: 'account'}
+//   } else if (to.name === 'account' && accountStore.isLogin) {
+//     alert('Already Login')
+//     return {name: 'home'}
+//   }
+// })
 export default router
