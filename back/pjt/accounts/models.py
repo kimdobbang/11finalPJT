@@ -5,7 +5,7 @@ from products.models import Installment
 
 # Create your models here.
 class User(AbstractUser):
-    nickname = models.CharField(max_length=100, unique=True)
+    nickname = models.CharField(max_length=100, null=True)
     profile_img = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     age = models.IntegerField()
     money = models.IntegerField()
