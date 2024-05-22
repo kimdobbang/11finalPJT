@@ -21,7 +21,7 @@ api_key = settings.API_KEY
 # ----------- 저장 -----------
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def save_fixed(request):
     ## (1) 1금융권 상품 목록 저장
     url = f'http://finlife.fss.or.kr/finlifeapi/depositProductsSearch.json?auth={api_key}&topFinGrpNo=020000&pageNo=1'
@@ -167,7 +167,7 @@ def save_fixed(request):
 
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def save_installment(request):
     ## (1) 1금융권 상품 목록 저장
     url = f'http://finlife.fss.or.kr/finlifeapi/savingProductsSearch.json?auth={api_key}&topFinGrpNo=020000&pageNo=1'
