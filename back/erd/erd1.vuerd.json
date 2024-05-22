@@ -3,8 +3,8 @@
     "version": "2.2.13",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -314.99998013178595,
-    "scrollLeft": -951.671875,
+    "scrollTop": 0,
+    "scrollLeft": -1168,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -89,7 +89,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -112,7 +112,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -135,7 +135,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -179,8 +179,8 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 65.58447265625,
-              "widthComment": 83.61181640625,
+              "widthName": 67.22216796875,
+              "widthComment": 84.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             }
@@ -259,7 +259,7 @@
           "active": false,
           "left": 776.6666,
           "top": 649.0002,
-          "zIndex": 10,
+          "zIndex": 8,
           "widthName": 60,
           "widthComment": 60,
           "color": "#9C27B0"
@@ -336,7 +336,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -380,9 +380,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 63.4326171875,
+              "widthName": 62.20751953125,
               "widthComment": 60,
-              "widthDataType": 66.7587890625,
+              "widthDataType": 61.42041015625,
               "widthDefault": 60
             }
           },
@@ -403,9 +403,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 67.0634765625,
+              "widthName": 67.84423828125,
               "widthComment": 60,
-              "widthDataType": 66.7587890625,
+              "widthDataType": 61.42041015625,
               "widthDefault": 60
             }
           }
@@ -450,6 +450,75 @@
             }
           },
           {
+            "id": "4a7e7e18-0843-4dd7-8242-decd5ceab8ec",
+            "name": "fin_grp_no",
+            "comment": "금융기관 종류 (1:1금융권, 2:저축은행)",
+            "dataType": "INTEGER",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 63.4326171875,
+              "widthComment": 120,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "325aac52-2dc6-42a8-a720-769370393d61",
+            "name": "fin_co_no",
+            "comment": "금융회사 코드",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "fe18160c-c476-421b-ab7a-f760c73a14bf",
+            "name": "kor_co_nm",
+            "comment": "금융회사 명",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.638671875,
+              "widthComment": 71.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
             "id": "1c82d72b-610c-4421-b28c-68632a173f97",
             "name": "fixed_code",
             "comment": "상품 코드",
@@ -466,9 +535,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 64.8798828125,
+              "widthName": 64.283203125,
               "widthComment": 60,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -489,9 +558,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 69.208984375,
+              "widthName": 68.23779296875,
               "widthComment": 60,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -512,9 +581,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 68.47900390625,
+              "widthName": 69.08203125,
               "widthComment": 120,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -537,7 +606,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -559,7 +628,7 @@
               "fk": false,
               "pfk": false,
               "widthName": 60,
-              "widthComment": 87.2236328125,
+              "widthComment": 89.140625,
               "widthDataType": 60,
               "widthDefault": 60
             }
@@ -627,7 +696,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 77.1435546875,
+              "widthName": 78.43212890625,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -651,7 +720,7 @@
               "fk": false,
               "pfk": false,
               "widthName": 60,
-              "widthComment": 83.61181640625,
+              "widthComment": 84.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             }
@@ -682,9 +751,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1340.4005,
-          "top": 489.6667,
-          "zIndex": 3,
+          "left": 1305.9564,
+          "top": 397.4447,
+          "zIndex": 48,
           "widthName": 60,
           "widthComment": 60,
           "color": "#FF9800"
@@ -713,7 +782,7 @@
               "pk": true,
               "fk": false,
               "pfk": false,
-              "widthName": 72.80810546875,
+              "widthName": 74.3251953125,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -805,9 +874,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 63.4326171875,
+              "widthName": 62.20751953125,
               "widthComment": 60,
-              "widthDataType": 66.7587890625,
+              "widthDataType": 61.42041015625,
               "widthDefault": 60
             }
           },
@@ -828,9 +897,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 67.0634765625,
+              "widthName": 67.84423828125,
               "widthComment": 60,
-              "widthDataType": 66.7587890625,
+              "widthDataType": 61.42041015625,
               "widthDefault": 60
             }
           }
@@ -868,8 +937,77 @@
               "pk": true,
               "fk": false,
               "pfk": false,
-              "widthName": 81.4853515625,
+              "widthName": 82.93896484375,
               "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "ca3a2724-5f0a-425f-95b0-aada3e3e744d",
+            "name": "fin_grp_no",
+            "comment": "금융기관 종류 (1:1금융권, 2:저축은행)",
+            "dataType": "INTEGER",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 63.4326171875,
+              "widthComment": 120,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "ea020251-b5ae-44c6-9a51-faf2cdae969a",
+            "name": "fin_co_no",
+            "comment": "금융회사 코드",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 84.5703125,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "id": "69fedf63-8a27-4b3f-9053-39bbfb3c4298",
+            "name": "kor_co_nm",
+            "comment": "금융회사 명",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.638671875,
+              "widthComment": 71.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             }
@@ -891,9 +1029,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 99.55712890625,
+              "widthName": 100.6298828125,
               "widthComment": 60,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -914,9 +1052,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 103.88623046875,
+              "widthName": 104.58447265625,
               "widthComment": 60,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -937,9 +1075,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 68.47900390625,
+              "widthName": 69.08203125,
               "widthComment": 120,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -962,7 +1100,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 64.6005859375,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -984,7 +1122,7 @@
               "fk": false,
               "pfk": false,
               "widthName": 60,
-              "widthComment": 87.2236328125,
+              "widthComment": 89.140625,
               "widthDataType": 60,
               "widthDefault": 60
             }
@@ -1052,7 +1190,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 77.1435546875,
+              "widthName": 78.43212890625,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -1076,7 +1214,7 @@
               "fk": false,
               "pfk": false,
               "widthName": 60,
-              "widthComment": 83.61181640625,
+              "widthComment": 84.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             }
@@ -1107,10 +1245,10 @@
         ],
         "ui": {
           "active": false,
-          "left": 1343.8951,
+          "left": 1299.4511,
           "top": 834.0002,
-          "zIndex": 12,
-          "widthName": 64.86083984375,
+          "zIndex": 49,
+          "widthName": 66.68896484375,
           "widthComment": 60,
           "color": "#4CAF50"
         },
@@ -1147,7 +1285,7 @@
           {
             "id": "a3e6ad6a-5ae1-46bf-86fb-883bab827e49",
             "name": "product",
-            "comment": "",
+            "comment": "참조 상품",
             "dataType": "INTEGER",
             "default": "",
             "option": {
@@ -1184,9 +1322,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 106.78076171875,
-              "widthComment": 100.2236328125,
-              "widthDataType": 64.6005859375,
+              "widthName": 105.68896484375,
+              "widthComment": 102.140625,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -1208,8 +1346,8 @@
               "fk": false,
               "pfk": false,
               "widthName": 60,
-              "widthComment": 95.8818359375,
-              "widthDataType": 64.6005859375,
+              "widthComment": 97.0625,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -1254,19 +1392,19 @@
               "fk": false,
               "pfk": false,
               "widthName": 60,
-              "widthComment": 83.61181640625,
+              "widthComment": 84.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             }
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 1531.7377,
           "top": 86.0001,
-          "zIndex": 9,
-          "widthName": 72.0908203125,
-          "widthComment": 87.2236328125,
+          "zIndex": 54,
+          "widthName": 73.24609375,
+          "widthComment": 89.140625,
           "color": "#FFEB3B"
         },
         "visible": true
@@ -1302,7 +1440,7 @@
           {
             "id": "8ee88971-babf-4ffc-bd4b-d856b0640e36",
             "name": "product",
-            "comment": "",
+            "comment": "참조 상품",
             "dataType": "INTEGER",
             "default": "",
             "option": {
@@ -1339,9 +1477,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 106.78076171875,
-              "widthComment": 100.2236328125,
-              "widthDataType": 64.6005859375,
+              "widthName": 105.68896484375,
+              "widthComment": 102.140625,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -1362,9 +1500,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 80.7490234375,
-              "widthComment": 70.61181640625,
-              "widthDataType": 64.6005859375,
+              "widthName": 79.4921875,
+              "widthComment": 71.5703125,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -1386,8 +1524,8 @@
               "fk": false,
               "pfk": false,
               "widthName": 60,
-              "widthComment": 95.8818359375,
-              "widthDataType": 64.6005859375,
+              "widthComment": 97.0625,
+              "widthDataType": 60,
               "widthDefault": 60
             }
           },
@@ -1432,7 +1570,7 @@
               "fk": false,
               "pfk": false,
               "widthName": 60,
-              "widthComment": 83.61181640625,
+              "widthComment": 84.5703125,
               "widthDataType": 60,
               "widthDefault": 60
             }
@@ -1440,11 +1578,11 @@
         ],
         "ui": {
           "active": false,
-          "left": 1561.39501953125,
+          "left": 1456.9506,
           "top": 1352.9995,
-          "zIndex": 8,
-          "widthName": 103.16259765625,
-          "widthComment": 87.2236328125,
+          "zIndex": 52,
+          "widthName": 107.5361328125,
+          "widthComment": 89.140625,
           "color": "#8BC34A"
         },
         "visible": true
@@ -1505,9 +1643,9 @@
           "active": false,
           "left": 754.9999,
           "top": 275,
-          "zIndex": 6,
-          "widthName": 68.46630859375,
-          "widthComment": 84.3291015625,
+          "zIndex": 4,
+          "widthName": 64.25146484375,
+          "widthComment": 85.33203125,
           "color": "#E91E63"
         },
         "visible": true
@@ -1557,7 +1695,7 @@
               "pk": false,
               "fk": false,
               "pfk": true,
-              "widthName": 64.13720703125,
+              "widthName": 66.3779296875,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -1568,9 +1706,9 @@
           "active": false,
           "left": 763.9995,
           "top": 1244.3328,
-          "zIndex": 7,
-          "widthName": 99.5380859375,
-          "widthComment": 84.3291015625,
+          "zIndex": 5,
+          "widthName": 98.54150390625,
+          "widthComment": 85.33203125,
           "color": "#009688"
         },
         "visible": true
@@ -1601,8 +1739,8 @@
           "columnIds": [
             "af9e7b78-10a4-4d30-98e4-c849fbf0d974"
           ],
-          "x": 1554.7725703125,
-          "y": 489.6667,
+          "x": 1518.672464453125,
+          "y": 397.4447,
           "direction": "top"
         },
         "end": {
@@ -1610,9 +1748,9 @@
           "columnIds": [
             "a3e6ad6a-5ae1-46bf-86fb-883bab827e49"
           ],
-          "x": 1751.040190234375,
-          "y": 278.0001,
-          "direction": "bottom"
+          "x": 1531.7377,
+          "y": 182.0001,
+          "direction": "left"
         },
         "constraintName": "fk_deposit_to_depositoption",
         "visible": true
@@ -1627,8 +1765,8 @@
           "columnIds": [
             "d1b781de-c109-4a89-82c5-0c74cc3902f8"
           ],
-          "x": 1571.638508203125,
-          "y": 1128.5002,
+          "x": 1525.243336328125,
+          "y": 1190.0002,
           "direction": "bottom"
         },
         "end": {
@@ -1636,7 +1774,7 @@
           "columnIds": [
             "8ee88971-babf-4ffc-bd4b-d856b0640e36"
           ],
-          "x": 1780.697509765625,
+          "x": 1674.365394921875,
           "y": 1352.9995,
           "direction": "top"
         },
@@ -1662,7 +1800,7 @@
           "columnIds": [
             "0ac4dfba-ff7b-4e26-9d3b-10677d78515e"
           ],
-          "x": 600.488765625,
+          "x": 595.9311484375,
           "y": 581.3338,
           "direction": "right"
         },
@@ -1679,7 +1817,7 @@
           "columnIds": [
             "d83fcbd5-11be-411c-a9e7-a494cb331b1c"
           ],
-          "x": 420.07763281250004,
+          "x": 417.79882421875004,
           "y": 677.3338,
           "direction": "bottom"
         },
@@ -1688,7 +1826,7 @@
           "columnIds": [
             "d363be31-5f6b-4b6b-a249-a64ce836126b"
           ],
-          "x": 246.950947265625,
+          "x": 245.040302734375,
           "y": 905.3337,
           "direction": "top"
         },
@@ -1714,7 +1852,7 @@
           "columnIds": [
             "9b7066d2-96eb-49f8-9cd8-63554cd9973d"
           ],
-          "x": 430.23439453125,
+          "x": 426.41310546875,
           "y": 1001.3337,
           "direction": "right"
         },
@@ -1731,7 +1869,7 @@
           "columnIds": [
             "0452c192-8f7a-4044-908a-35d4bba4e446"
           ],
-          "x": 967.0650375,
+          "x": 966.062840234375,
           "y": 649.0002,
           "direction": "top"
         },
@@ -1757,8 +1895,8 @@
           "columnIds": [
             "af9e7b78-10a4-4d30-98e4-c849fbf0d974"
           ],
-          "x": 1340.4005,
-          "y": 636.9167,
+          "x": 1305.9564,
+          "y": 575.4447,
           "direction": "left"
         },
         "end": {
@@ -1783,7 +1921,7 @@
           "columnIds": [
             "0452c192-8f7a-4044-908a-35d4bba4e446"
           ],
-          "x": 967.0650375,
+          "x": 966.062840234375,
           "y": 902.5002,
           "direction": "bottom"
         },
@@ -1792,7 +1930,7 @@
           "columnIds": [
             "5ec9907f-f9c9-43b0-8ab7-13dab202db3b"
           ],
-          "x": 939.568103515625,
+          "x": 940.68846484375,
           "y": 1244.3328,
           "direction": "top"
         },
@@ -1809,8 +1947,8 @@
           "columnIds": [
             "d1b781de-c109-4a89-82c5-0c74cc3902f8"
           ],
-          "x": 1343.8951,
-          "y": 981.2502,
+          "x": 1299.4511,
+          "y": 1012.0002,
           "direction": "left"
         },
         "end": {
@@ -1818,7 +1956,7 @@
           "columnIds": [
             "5c879a1a-867a-4ca8-bd3e-6bc68cae2bc3"
           ],
-          "x": 1115.13670703125,
+          "x": 1117.3774296875,
           "y": 1299.3328,
           "direction": "right"
         },
