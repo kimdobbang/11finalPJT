@@ -1,6 +1,10 @@
 <template>
   <div>
     <h1>Fixed List</h1>
+    <ProductSearchForm 
+    :productType="1"
+    @searchClick="searchClick"
+    />
     <table class="sortable">
       <thead>
         <tr>
@@ -17,7 +21,8 @@
       <tbody>
         <ProductFixedListItem
         v-for="product in productList"
-        :product = "product"
+        :product="product"
+        :rateType="getRateType"
         />
       </tbody>
     </table>
@@ -28,14 +33,30 @@
 import { ref, onMounted } from 'vue';
 import { useProductStore } from '@/stores/productstore';
 import ProductFixedListItem from '@/components/product/ProductFixedListItem.vue';
+import ProductSearchForm from '@/components/product/ProductSearchForm.vue';
 
 const productStore = useProductStore()
 const productList = ref([])
-const productInfo = ref({})
+const getRateType = ref('')
+
+const searchClick = function (bankType,bankName,rateType) {
+  if (bankType == 1) {
+    productList.value = productStore.fixedList.filter((product) => product.fin_grp_no == 1)
+  } else if (bankType == 2) {
+    productList.value = productStore.fixedList.filter((product) => product.fin_grp_no == 2)
+  }
+  if (bankName) {
+    productList.value = productList.value.filter((product) => product.kor_co_nm === bankName)
+  }
+  if (rateType) {
+    getRateType.value = rateType
+  }
+
+}
 
 onMounted(() => {
   productStore.getFixed()
-  productList.value = productStore.fixedList
+  productList.value = productStore.fixedList.filter((product) => product.fin_grp_no == 1)
 })
 </script>
 
