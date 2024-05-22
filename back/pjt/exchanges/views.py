@@ -8,12 +8,17 @@ from rest_framework import status
 from .models import Exchange
 from .serializers import ExchangeSerializer
 from decimal import Decimal, ROUND_DOWN
+
+# permission Decorators
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 # Create your views here.
 
 api_key = settings.EX_API_KEY
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def save_exchange(request):
     url = f'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey={api_key}&data=AP01'
 
@@ -52,7 +57,8 @@ def save_exchange(request):
     return JsonResponse({'message' : 'save Exchange complete!'})
 
 
-# [GET] 전체 정기예금 상품 조회
+# [GET] 전체 환율정보 조회
+@permission_classes([IsAuthenticated])
 @api_view(['GET']) 
 def get_exchange(request):
     if request.method == 'GET':
