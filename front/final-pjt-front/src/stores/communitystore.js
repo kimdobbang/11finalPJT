@@ -27,10 +27,11 @@ export const useCommunityStore = defineStore('community', () => {
       if(res.data){
         articles.value = res.data
       } else {
-        console.log('emdfhrsdfjkl')
+        console.log('게시글 목록 등록 완료')
       }
     })
     .catch(err => console.log(err))
   }
+  
   return { BASE_URL, TOKEN, getArticles, articles }
 },{persist:true})

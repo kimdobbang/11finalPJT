@@ -54,16 +54,21 @@ def detail(request, article_id):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
         
-
+# [GET] 전체 댓글 조회
 # [POST] 게시글에 댓글 등록
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def comments_create(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
-    serializer = CommentSerializer(data=request.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(article=article, user = request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    if request.method == 'GET':
+        comments = Comment.objects.filter(article=article)
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(article=article, user = request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
