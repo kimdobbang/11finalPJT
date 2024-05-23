@@ -30,10 +30,11 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # 환경변수 읽어오기(기본 사용방법)
 os.environ.get('API_KEY')
 os.environ.get('EX_API_KEY')
+os.environ.get('OPENAI_API_KEY')
 
 API_KEY = env('API_KEY')
 EX_API_KEY = env('EX_API_KEY')
-
+OPENAI_API_KEY = env('OPENAI_API_KEY')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -51,6 +52,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # APP
+    'gpt',
     'accounts',
     'articles',
     'products',
@@ -105,6 +107,7 @@ REST_AUTH = {
 ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -116,10 +119,14 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:5173',
-    'http://localhost:5173',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://127.0.0.1:5173',
+#     'http://localhost:5173',
+#     'http://localhost:3000',
+# ]
+# Allow all origins for now (You can restrict it to specific domains)
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 ROOT_URLCONF = 'pjt.urls'
 
