@@ -62,4 +62,4 @@ class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = '__all__'
-        read_only_fields = ('email', 'fixed', 'installment')
+        read_only_fields = ('fixed', 'installment')

@@ -110,7 +110,7 @@ const joinOutProduct = function () {
 } 
 
 onMounted(() => {
-  if (userInfo.fixed.includes(productId)) {
+  if (userInfo.installment.includes(productId)) {
     userChange.value = '탈퇴하기'
   } else {
     userChange.value = '가입하기'

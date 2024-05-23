@@ -10,16 +10,16 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 # Create your views here.
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated])
 def getuser(request ,username):
     usermodel = get_user_model().objects.get(username=username)
-    # 단일 유저 정보 조회
+    # [GET] 단일 유저 정보 조회
     if request.method == 'GET':
         serializer = UserInfoSerializer(usermodel)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-     # [PUT] 게시글 수정
+    # [PUT] 단일 유저 정보 수정
     elif request.method == 'PUT':
         # 작성자 확인
         if request.user == usermodel:
