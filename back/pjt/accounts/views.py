@@ -27,6 +27,15 @@ def getuser(request ,username):
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
+            
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getuser2(request ,userId):
+    usermodel = get_user_model().objects.get(id=userId)
+    # [GET] 단일 유저 정보 조회(유저 Id로 조회)
+    if request.method == 'GET':
+        serializer = UserInfoSerializer(usermodel)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])

@@ -14,6 +14,7 @@ urlpatterns = [
     path('<int:article_id>/', views.detail),
 
     #-------댓글--------------
+    # [GET] 전체 댓글 조회
     # [POST] 게시글에 댓글 등록
     path('<int:article_id>/comment/', views.comments_create),
 
