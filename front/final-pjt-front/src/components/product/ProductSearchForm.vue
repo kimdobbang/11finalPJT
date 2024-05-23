@@ -1,26 +1,26 @@
 <template>
-  <div class="d-flex justify-content-between w-50">
-      <div>
+  <div class="d-flex justify-content-between align-items-end w-100">
+      <div class="d-flex flex-column mx-4">
         <input type="radio" class="btn-check" name='fingrp' autocomplete="off" id="fingrp1" v-model="bankType" value="1" checked/>
-        <label class="btn btn-outline-success" for="fingrp1">1금융권</label>
+        <label class="btn btn-outline-success" for="fingrp1">1금융권</label><br>
         <input type="radio" class="btn-check" name='fingrp' autocomplete="off" id="fingrp2" v-model="bankType" value="2" />
         <label class="btn btn-outline-success" for="fingrp2">저축은행</label>
       </div>
-      <div v-if="bankType < 2">
-        <label for="bank">은행 선택 : </label>
-        <select id="bank" @change="bankNameChange($event.target.value)">
+      <div v-if="bankType < 2" class="floating mx-4">
+        <label for="bank">은행 선택</label>
+        <select id="bank" @change="bankNameChange($event.target.value)" class="form-select" aria-label="Bank Selection">
           <option value="" selected>전체</option>
           <option v-for="(bank, index) in groupedList" :key="index">{{ bank }}</option>
         </select>
       </div>
-      <div v-if="bankType > 1">
+      
+      <div v-if="bankType > 1" class="d-flex flex-column mx-4">
         <input type="radio" class="btn-check" name="options-outlined" autocomplete="off" id="Srate" v-model="rateType" value="단리" checked>
-        <label class="btn btn-outline-success" for="Srate">단리</label>
-
+        <label class="btn btn-outline-success" for="Srate">단리</label><br>
         <input type="radio" class="btn-check" name="options-outlined" autocomplete="off" id="Mrate" v-model="rateType" value="복리">
         <label class="btn btn-outline-success" for="Mrate">복리</label>
       </div>
-      <button @click="searchClick">검색</button>
+      <button class="btn btn-success h-50 mx-4" @click="searchClick">검색</button>
   </div>
 </template>
 

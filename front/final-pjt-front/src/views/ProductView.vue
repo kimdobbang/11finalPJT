@@ -2,22 +2,37 @@
   <div class="container d-flex flex-column justify-content-center align-items-center mt-4">
     <h1>금융상품 목록</h1>
     <div>
-    <RouterLink :to="{name: 'fixed'}">정기예금</RouterLink> 
-    <RouterLink :to="{name: 'installment'}">적금</RouterLink>
+      <ul class="nav nav-underline">
+  <li class="nav-item">
+    <RouterLink :to="{name: 'fixed'}" :class="[first ? 'nav-link active' : 'nav-link']" @click="nowArea(1)">정기예금</RouterLink> 
+  </li>
+  <li class="nav-item">
+    <RouterLink :to="{name: 'installment'}" :class="[first ? 'nav-link' : 'nav-link active']" @click="nowArea(2)">적금</RouterLink>
+  </li>
+  </ul>
+  
     </div>
     
   </div>
-  <div>
+  <div class="d-flex justify-content-center align-items-center">
     <RouterView />
   </div>
 </template>
 
 <script setup>
 import { RouterLink, RouterView, useRouter } from 'vue-router';
-import { onMounted } from 'vue';
+import { onMounted,ref } from 'vue';
 
 const router = useRouter()
 
+const first = ref(true)
+
+const nowArea = function (num) {
+  if (num === 1) {
+  first.value = true
+} else {
+  first.value = false
+}}
 onMounted(() => {
   router.push({name:'fixed'})
 })
@@ -33,5 +48,8 @@ a{
 .container {
   font-family:'GamtanRoad Batang';
   font-size: 25px;
+}
+.nav-link:hover {
+  color: #83A2FF;
 }
 </style>

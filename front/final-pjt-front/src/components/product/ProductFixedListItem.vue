@@ -6,7 +6,7 @@
     <td>{{ product.fixed_name }}</td>
     <!-- 옵션 금리 표시 -->
     <td v-for="option in filteredOptions">{{ option }}</td>
-    <td><button @click="productDetail">Detail</button></td>
+    <td><RouterLink :to="{name:'fixeddetail',params:{fixedId: props.product.id}}">상세보기</RouterLink></td>
   </tr>
 </template>
 
@@ -17,7 +17,7 @@ const props = defineProps({
 })
 import { useProductStore } from '@/stores/productstore';
 import { onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter,RouterLink, useRoute } from 'vue-router';
 
 const productStore = useProductStore()
 const options = ref([])
@@ -26,9 +26,9 @@ const filteredOptions = ref([])
 const router = useRouter()
 const rateType = props.rateType
 
-const productDetail = function () {
-  router.push({name: 'fixeddetail', params:{fixedId: props.product.id}})
-}
+// const productDetail = function () {
+//   router.push({name: 'fixeddetail', params:{fixedId: props.product.id}})
+// }
 
 onMounted(() => {
   if (!rateType) {
@@ -49,12 +49,17 @@ onMounted(() => {
       filteredOptions.value.push('-')
     }
   }
+  
 })
 </script>
 
 <style scoped>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
+a{
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  text-decoration: solid;
+  color: #83A2FF;
 }
 </style>
