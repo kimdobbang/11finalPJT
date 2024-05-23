@@ -2,13 +2,13 @@
   <div>
 
 
-    <Chat />
+    <GPT />
 
   </div>
 </template>
 
 <script setup>
-import Chat from '@/components/chatbot/Chat.vue'
+import GPT from '@/components/chatbot/GPT.vue'
 
 </script>
 
