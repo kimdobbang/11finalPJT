@@ -11,6 +11,7 @@ export const useAccountStore = defineStore('account', () => {
   const TOKEN = ref(null)
   // 라우터 변수 지정
   const router = useRouter()
+  
   // 현재 로그인 유저 정보 변수 지정
   const userNow = ref({})
   // 상품 목록 전달용 변수 지정

@@ -26,6 +26,7 @@
         </ul>
       </div>
       <div class="d-flex flex-column">
+        <RouterLink :to="{name: 'profile'}" v-if="accoutStore.isLogin">My Profile</RouterLink>
         <RouterLink :to="{name: 'account'}" v-if="!accoutStore.isLogin" class="login">로그인 / 회원가입</RouterLink>
         <RouterLink :to="{name: 'login'}" v-if="accoutStore.isLogin" @click="logoutEvent">로그아웃</RouterLink>
       </div>
