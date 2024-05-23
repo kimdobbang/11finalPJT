@@ -24,12 +24,12 @@
         </p>
       </div>
       <div style="width:50%; height: 100%;">
-        <img src="@/assets/img/01.jpg" alt="img1" style="width: 100vw; height: 100%; object-fit: cover;">
+        <img src="@/assets/img/1.png" alt="img1" style="width: 100w; height: 100%; object-fit: cover;">
       </div>
     </div>
     <div class="d-flex" style="width: 100%; height: 720px;">
       <div style="width:50%; height: 100%;">
-        <img src="@/assets/img/02.jpg" alt="img2" style="width: 100%; height: 100%; object-fit: cover;">
+        <img src="@/assets/img/2.png" alt="img2" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
       <div class="d-flex justify-content-center align-items-center" style="width:50%; height: 100%;">
         <p class="text-center">
@@ -48,7 +48,7 @@
         </p>
       </div>
       <div style="width:50%; height: 100%;">
-        <img src="@/assets/img/03.jpg" alt="img3" style="width: 100%; height: 100%; object-fit: cover;">
+        <img src="@/assets/img/3.png" alt="img3" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
     </div>
     <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; height: 720px;">
