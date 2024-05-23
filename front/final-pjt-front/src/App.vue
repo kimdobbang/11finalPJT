@@ -28,16 +28,16 @@
           </li>
         </ul>
       </div>
-      <div class="d-flex flex-column">
-        <RouterLink :to="{name: 'profile'}" v-if="accoutStore.isLogin">My Profile</RouterLink>
+      <div class="d-flex">
+        <RouterLink :to="{name: 'profile'}" v-if="accoutStore.isLogin" class="login">My Profile</RouterLink>
         <RouterLink :to="{name: 'account'}" v-if="!accoutStore.isLogin" class="login">로그인 / 회원가입</RouterLink>
-        <RouterLink :to="{name: 'login'}" v-if="accoutStore.isLogin" @click="logoutEvent">로그아웃</RouterLink>
+        <RouterLink :to="{name: 'login'}" v-if="accoutStore.isLogin" @click="logoutEvent" class="login">로그아웃</RouterLink>
       </div>
     </nav>
     <div>
       <RouterView />
     </div>
-    <footer class="d-flex justify-content-center align-items-center mb-0" style="background-color: rgba(0, 0, 0, 0.792); width: 100%; height: 100px;">
+    <footer class="d-flex justify-content-center align-items-center mt-auto" style="background-color: rgba(0, 0, 0, 0.792); width: 100%; height: 100px;">
       <div class="me-4">
         <img src="@/assets/img/Logo.png" alt="Logo" style="width: 50px;">
       </div>
@@ -87,5 +87,7 @@ p {
 }
 .login {
   font-size: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 </style>

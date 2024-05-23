@@ -30,4 +30,5 @@ urlpatterns = [
     path('accounts/getallusers/', views.allusers), 
     path('products/', include('products.urls')), 
     path('exchanges/', include('exchanges.urls')), 
+    path('gpt/', include('gpt.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
