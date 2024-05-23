@@ -19,12 +19,7 @@ import ExchangeInfoItem from '@/components/exchange/ExchangeInfoItem.vue'
 
 
 const store = useExchangeStore()
-//계산기
-const emit = defineEmits(['rate-selected'])
-const selectRate = (rate) => {
-  emit('rate-selected', rate)
-}
-//계산끝
+
 </script>
 
 <style scoped>

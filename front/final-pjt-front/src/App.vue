@@ -23,6 +23,9 @@
           <li class="nav-item">
             <RouterLink :to="{name: 'communitylist'}">커뮤니티</RouterLink>
           </li>
+          <li class="nav-item">
+            <RouterLink :to="{name: 'recommend'}">나만의 금융 상품 추천</RouterLink>
+          </li>
         </ul>
       </div>
       <div class="d-flex flex-column">
