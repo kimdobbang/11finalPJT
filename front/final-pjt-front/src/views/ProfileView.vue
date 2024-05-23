@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <h1>{{ user.username }} 님의 프로필 페이지</h1>
-    <UserInfo />
+  <h1 class="mt-3 text-center">{{ user.username }} 님의 프로필 페이지</h1>
+  <div class="container d-flex flex-wrap justify-content-around mt-4">
+    <div class="col-5">
+      <UserInfo />
+    </div>
     <UserProducts />
   </div>
 </template>
@@ -23,5 +25,7 @@ const user = accountStore.userNow
 </script>
 
 <style scoped>
-
+h1 {
+  font-family: 'GamtanRoad Batang';
+}
 </style>

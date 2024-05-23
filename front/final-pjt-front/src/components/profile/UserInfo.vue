@@ -1,31 +1,43 @@
 <template>
   <div>
-    <h2>기본 정보 수정</h2>
+    <h3 class="text-center">기본 정보 수정</h3>
     <p>회원번호 {{ user.id }} </p>
     <p>ID {{ user.username }} </p>
-    <p>
-      <label>Email</label>
-      <input v-model="email" type="text" />
-    </p>
-    <p>
-      <label>Nickname</label>
-      <input v-model="nickname" type="text" />
-    </p>
-    <p>
-      <label>나이</label>
-      <input v-model="age" type="text" />
-    </p>
-    <p>
-      <label>현재 가진 금액</label>
-      <input v-model="money" type="text" />
-    </p>
-    <p>
-      <label>연봉</label>
-      <input v-model="salary" type="text" />
-    </p>
-    <button @click="updateEvent()">수정하기</button>
-  </div>
+
+    <form @submit.prevent="updateEvent()">
+      <div class="form-floating my-3">
+            <input type="text" class="form-control" id="nikename" placeholder="닉네임 입력" v-model="nickname">
+            <label for="nikename">닉네임</label>
+      </div>
+
+      <div class="form-floating my-3">
+        <input type="email" class="form-control" id="email" placeholder="name@example.com" v-model="email">
+        <label for="email">이메일 주소</label>
+      </div>
+
+      <div class="form-floating my-3">
+        <input type="text" class="form-control" id="age" placeholder="나이 입력" v-model="age">
+        <label for="age">나이</label>
+      </div>
+
+      <div class="form-floating my-3">
+        <input type="text" class="form-control" id="money" placeholder="자산 입력" v-model="money">
+        <label for="money">자산</label>
+      </div>
+
+      <div class="form-floating my-3">
+        <input type="text" class="form-control" id="salary" placeholder="연 수입 입력" v-model="salary">
+        <label for="salary">연 수입</label>
+      </div>
+        <div class="d-flex justify-content-center align-items-center">
+        <input type="submit" value="수정하기" class="startbtn">
+      </div>
+    </form> 
+    </div>
+
+
 </template>
+
 
 <script setup>
 import { useRoute,RouterLink } from 'vue-router';
@@ -72,5 +84,29 @@ const updateEvent = function () {
 </script>
 
 <style scoped>
-
+* {
+ font-family: 'Orbit-Regular';
+}
+h2 {
+  font-family: 'GamtanRoad Batang';
+}
+.startbtn {
+  width: 40%;
+  height: 40px;
+  border: 0px;
+  border-radius: 40px;
+  background-color: rgb(131, 162, 255);
+  font-family: 'KCC-Hanbit';
+  font-size: 18px;
+  color: whitesmoke;
+}
+.startbtn:hover {
+  background-color:rgb(180, 189, 255);
+  transition: 0.5s;
+}
+.startbtn:active {
+  background-color: rgb(133, 140, 188);
+  box-shadow: inset 3px 3px 3px 3px  rgb(166, 175, 235);
+  transition: 0.2s;
+}
 </style>

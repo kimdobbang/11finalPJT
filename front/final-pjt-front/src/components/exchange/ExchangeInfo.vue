@@ -26,9 +26,7 @@ const store = useExchangeStore()
 
 <style scoped>
 h1 {
-    font-family {
-      font-family: 'GamtanRoad Batang';
-    }
+  font-family: 'GamtanRoad Batang';
 }
 a {
   text-decoration: none;

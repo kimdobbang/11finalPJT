@@ -1,11 +1,21 @@
 <template>
-  <div>
+    <div class="w-50">
+    <h3 class="text-center">게시글 수정</h3>
     <form @submit.prevent="articleUpdate">
-      <label for="title">title : </label>
-      <input type="text" id="title" v-model.trim="title"><br>
-      <label for="content">content : </label>
-      <textarea type="text" id="content" v-model.trim="content"></textarea><br>
-      <input type="submit" value="update">
+      <div class="form-floating my-3">
+        <input type="text" class="form-control" id="title" placeholder="제목 입력" v-model.trim="title">
+        <label for="title">제목</label>
+      </div>
+
+      <div class="form-floating my-3">
+        <textarea class="form-control" id="content" placeholder="내용 입력" v-model.trim="content" style="height: 150px"></textarea>
+        <label for="content">내용</label>
+      </div>
+
+
+      <div class="d-flex justify-content-center align-items-center">
+        <input type="submit" value="게시" class="out">
+      </div>
     </form>
   </div>
 </template>
@@ -42,6 +52,28 @@ const articleUpdate = function () {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+* {
+  font-family: 'Orbit-Regular';
+}
+.out {
+  width: 40%;
+  height: 40px;
+  border: 0px;
+  border-radius: 40px;
+  margin-top: 20px;
+  background-color: rgb(214, 79, 101);
+  font-family: 'KCC-Hanbit';
+  font-size: 20px;
+  color: whitesmoke;
+}
+.out:hover {
+  background-color:rgb(230, 115, 134);
+  transition: 0.5s;
+}
+.out:active {
+  background-color: rgb(173, 62, 80);
+  box-shadow: inset 3px 3px 3px 3px  rgb(129, 56, 69);
+  transition: 0.2s;
+}
 </style>
