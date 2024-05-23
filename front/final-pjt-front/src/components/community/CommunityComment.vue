@@ -1,27 +1,31 @@
 <template>
-  <div v-if="user">
+  <li v-if="user" class="list-group-item">
     <p v-show="comment.user !== userNow.id">
       {{ comment.content }} - {{ user.username }}
     </p>
     <div v-show="comment.user == userNow.id">
-      <input type="text" v-model="content"><button @click="updateComment">수정</button>
-      <button v-show="comment.user == userNow.id" @click="deleteComment">삭제</button>
+      <input type="text" v-model="content" style="border: none;">
+      <div class="card-item d-flex justify-content-end">
+        <button v-if="accountStore.userNow.id === comment.user" @click="updateComment" class="btn btn-outline-primary mx-2">수정</button>
+        <button v-if="accountStore.userNow.id === comment.user" @click="deleteComment" class="btn btn-outline-danger mx-2">삭제</button>
+      </div>
     </div>
-  </div>
+  </li>
 </template>
 
 <script setup>
   import { onMounted, ref } from 'vue';
-  import { useRoute,RouterLink } from 'vue-router';
+  import { useRouter,RouterLink } from 'vue-router';
   import axios from 'axios';
   import { useCommunityStore } from '@/stores/communitystore';
   import { useAccountStore } from '@/stores/accountstore';
-  import router from '@/router';
-
+  
+  const router = useRouter()
   const communityStore = useCommunityStore()
   const accountStore = useAccountStore()
   const props = defineProps({
-  comment: Object
+  comment: Object,
+  getComments: Function
 })
 
   const user = ref(null)
@@ -61,7 +65,7 @@
       .then(res => {
           console.log('댓글 삭제 완료')
           // 왜 아래 코드로 새로고침이 안되는걸까 22
-          // router.push({ name: 'articledetail', params: { articleId: props.comment.article } });
+          props.getComments()
       })
       .catch(err => console.log(err))
     }
@@ -82,7 +86,8 @@
       .then(res => {
           console.log('댓글 수정 완료')
           // 왜 아래 코드로 새로고침이 안되는걸까 333
-          // router.push({ name: 'articledetail', params: { articleId: props.comment.article } });
+          props.getComments()
+
       })
       .catch(err => console.log(err))
     }

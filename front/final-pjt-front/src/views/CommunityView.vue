@@ -1,10 +1,9 @@
 <template>
   <div class="container d-flex flex-column justify-content-center align-items-center mt-4">
-    <h1>커뮤니티</h1>
+    <h1>금융생활 꿀팁 공유 게시판</h1>
   </div>
   <hr class="border border-2 opacity-30">  
-
-  <div class="container d-flex flex-column justify-content-center align-items-center">
+  <div class="container d-flex flex-column align-items-center">
     <RouterView />
   </div>
 </template>
