@@ -58,8 +58,6 @@ const router = createRouter({
       path: '/exchange',
       name: 'exchange',
       component: ExchangeView,
-      // children: [
-      // ]
     },
     {
       path: '/bank',
