@@ -12,13 +12,6 @@ const props = defineProps({
   exchangerate: Object
 })
 
-//계산
-const emit = defineEmits(['rate-selected'])
-
-const handleClick = () => {
-  emit('rate-selected', props.exchangerate.DEAL_BAS_R)
-}
-//계산
 
 </script>
 
