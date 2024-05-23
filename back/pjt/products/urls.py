@@ -43,4 +43,10 @@ urlpatterns = [
     # [POST] 정기적금 상품 가입
     # [DELETE] 정기적금 상품 탈퇴
     path('installment/<str:username>/<int:product_id>/', views.join_installment),
+    
+    # ----------- 상품 추천 -----------
+    
+    # [GET] 정기예금, 적금 상품 추천
+    path('recommend/<str:username>/', views.recommend),
+
 ]
