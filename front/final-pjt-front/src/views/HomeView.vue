@@ -24,7 +24,7 @@
         </p>
       </div>
       <div style="width:50%; height: 100%;">
-        <img src="@/assets/img/01.jpg" alt="img1" style="width: 100%; height: 100%; object-fit: cover;">
+        <img src="@/assets/img/01.jpg" alt="img1" style="width: 100vw; height: 100%; object-fit: cover;">
       </div>
     </div>
     <div class="d-flex" style="width: 100%; height: 720px;">
@@ -51,17 +51,26 @@
         <img src="@/assets/img/03.jpg" alt="img3" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
     </div>
-    
-    
-
-    <div>
-
+    <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; height: 720px;">
+      <div class="d-flex justify-content-center align-items-center" style="width:50%; height: 40%;">
+        <p class="text-center">
+        파이냠과 함께<br>
+        알찬 금융생활을 시작하세요!
+        </p>
+      </div>
+      <div @click="start" class="d-flex justify-content-center align-items-center startbtn">
+        시작하기
+      </div>
     </div>
   </content>
 </template>
 
 <script setup>
-
+import { useRouter } from 'vue-router';
+const router = useRouter()
+const start = function () {
+  router.push({name:'account'})
+}
 </script>
 
 <style scoped>
@@ -76,9 +85,34 @@
          url('https://cdn.jsdelivr.net/gh/fonts-archive/GamtanRoadBatang/GamtanRoadBatang-Regular.ttf') format('truetype');
 
 }
+a {
+  text-decoration: none;
+  font-size: 25px;
+  font-family: 'KCC-Hanbit';
+  color: whitesmoke;
+  margin-left: 40px;
+  margin-right: 40px;
+}
 p {
   font-family: 'GamtanRoad Batang';
   font-size: 35px;
 }
-
+.startbtn {
+  width: 20%;
+  height: 70px;
+  border-radius: 40px;
+  background-color: rgb(131, 162, 255);
+  font-family: 'KCC-Hanbit';
+  font-size: 25px;
+  color: whitesmoke;
+}
+.startbtn:hover {
+  background-color:rgb(180, 189, 255);
+  transition: 0.5s;
+}
+.startbtn:active {
+  background-color: rgb(133, 140, 188);
+  box-shadow: inset 3px 3px 3px 3px  rgb(166, 175, 235);
+  transition: 0.2s;
+}
 </style>
