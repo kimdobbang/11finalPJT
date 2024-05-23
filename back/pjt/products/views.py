@@ -9,6 +9,9 @@ from rest_framework import status
 from .models import Fixed, FixedOption, Installment, InstallmentOption
 from .serializers import FixedSerializer, FixedOptionsSerializer, InstallmentSerializer, InstallmentOptionsSerializer
 from accounts.serializers import UserInfoSerializer
+from django.db.models import Q
+from django.db.models import Subquery, OuterRef, Max, Value
+from django.db.models.functions import Coalesce
 
 # permission Decorators
 from rest_framework.decorators import permission_classes
@@ -411,3 +414,69 @@ def join_installment(request, username, product_id):
         usermodel.installment.remove(installment)
         serializer = UserInfoSerializer(usermodel)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+# [GET] 정기예금, 적금 상품 추천
+@api_view(['GET'])
+def recommend(request, username):
+    try:
+        user = get_user_model().objects.get(username=username)
+        
+        # 기본 추천 리스트 초기화
+        recommended_fixed = Fixed.objects.all()
+        recommended_installment = Installment.objects.all()
+        
+        # 이미 가입한 상품은 제외
+        recommended_fixed = recommended_fixed.exclude(member__id=user.id)
+        recommended_installment = recommended_installment.exclude(member__id=user.id)
+        
+        # 가입 제한 있는 상품은 제외
+        recommended_fixed = recommended_fixed.exclude(join_deny=3)
+        recommended_installment = recommended_installment.exclude(join_deny=3)
+        
+        # 나이 제한 필터링
+        if user.age < 17:
+            recommended_installment = recommended_installment.exclude(join_member='만 17세 이상의 실명의 개인')
+            
+        if user.age < 19:
+            recommended_fixed = recommended_fixed.exclude(Q(join_member='만19세이상의 개인') | Q(join_member='개인(만19세이상)'))
+            recommended_installment = recommended_installment.exclude(join_member='-만19세이상의 개인')
+            
+        if user.age < 50:
+            recommended_fixed = recommended_fixed.exclude(join_member='만50세 이상 개인')
+            
+        if user.age < 65:
+            recommended_fixed = recommended_fixed.exclude(join_member='만 65세이상 고객')
+        
+        # 연봉 기반 추천 필터링 (한도가 기준 이상이거나 없는 상품)
+        criteria = int(user.salary) / 20
+        # recommended_installment = recommended_installment.filter(max_limit__gt=criteria)
+        recommended_installment = recommended_installment.filter(Q(max_limit__gt=criteria) | Q(max_limit=None))
+        
+        # 보유 자산 기반 추천 필터링 (한도가 기준 이상이거나 없는 상품)
+        criteria = int(user.money) / 10
+        # recommended_fixed = recommended_fixed.filter(max_limit__gt=criteria)
+        recommended_fixed = recommended_fixed.filter(Q(max_limit__gt=criteria) | Q(max_limit=None))
+        
+        # 금리가 높은 순서로 정렬하여 상위 5개 상품 추출
+        recommended_fixed = recommended_fixed.annotate(
+            highest_rate=Max('fixedoption__intr_rate2')
+        ).order_by('-highest_rate')[:5]
+        
+        recommended_installment = recommended_installment.annotate(
+            highest_rate=Max('installmentoption__intr_rate2')
+        ).order_by('-highest_rate')[:5]
+        
+        # 직렬화
+        fixed_serializer = FixedSerializer(recommended_fixed, many=True)
+        installment_serializer = InstallmentSerializer(recommended_installment, many=True)
+        
+        # 추천 상품 응답
+        return Response({
+            "recommended_fixed": fixed_serializer.data,
+            "recommended_installment": installment_serializer.data
+        }, status=status.HTTP_200_OK)
+    
+    except get_user_model().DoesNotExist:
+        return Response({"error": "유저를 찾을 수 없습니다"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
