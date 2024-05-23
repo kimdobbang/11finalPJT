@@ -5,15 +5,12 @@
     <ExchangeInfoItem
     v-for="exchangerate in store.exchangerates"
     :key="exchangerate.id"
-    :exchangerate="exchangerate"
-    @click="selectRate(exchangerate.DEAL_BAS_R)"/>
+    :exchangerate="exchangerate"/>
 
-<!-- @click 이벤트로 계산할 환율 선택 -->
   </div>
 </template>
 
 <script setup>
-import { defineEmits } from 'vue'
 import { useExchangeStore } from '@/stores/exchangestore'
 import ExchangeInfoItem from '@/components/exchange/ExchangeInfoItem.vue'
 

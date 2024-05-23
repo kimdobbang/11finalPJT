@@ -6,7 +6,7 @@
     <p>상품 코드 : {{ product.installment_code }}</p>
     <p>상품 이름 : {{ product.installment_name }}</p>
   </div>
-  <form @submit="joinOutProduct">
+  <form @submit.prevent="joinOutProduct">
     <input type="submit" v-model="userChange">
   </form>
 </template>
@@ -42,6 +42,7 @@ const joinOutProduct = function () {
       console.log(`${product.value.installment_name}`)
       alert(`${product.value.installment_name} 상품가입이 완료되었습니다!`)
       accountStore.userNow = res.data
+      userChange.value = '탈퇴하기'
     })
   } else {
     axios({
@@ -54,6 +55,7 @@ const joinOutProduct = function () {
     .then(res => {
       console.log('탈퇴 완료!')
       accountStore.userNow = res.data
+      userChange.value = '가입하기'
     })
   }
 } 

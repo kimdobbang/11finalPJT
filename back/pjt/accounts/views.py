@@ -14,12 +14,24 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 @permission_classes([IsAuthenticated])
 def getuser(request ,username):
     usermodel = get_user_model().objects.get(username=username)
-    serializer = UserInfoSerializer(usermodel)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    # 단일 유저 정보 조회
+    if request.method == 'GET':
+        serializer = UserInfoSerializer(usermodel)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+     # [PUT] 게시글 수정
+    elif request.method == 'PUT':
+        # 작성자 확인
+        if request.user == usermodel:
+            serializer = UserInfoSerializer(usermodel, data=request.data, partial=True)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+# 전체 유저 정보 조회
 def allusers(request ,username):
     usermodel = get_user_model().objects.all()
     serializer = UserInfoSerializer(usermodel, many=True)

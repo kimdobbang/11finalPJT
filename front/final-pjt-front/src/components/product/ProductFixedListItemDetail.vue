@@ -46,9 +46,9 @@
           <li class="list-group-item">최고 우대금리 : {{ option.intr_rate }}%</li>
         </ul>
       </div>
+    </div>
   </div>
-  </div>
-  <form @submit="joinOutProduct" style="margin-bottom: 20px;">
+  <form @submit.prevent="joinOutProduct" style="margin-bottom: 20px;">
     <input type="submit" v-model="userChange">
   </form>
   </div>
@@ -89,6 +89,7 @@ const joinOutProduct = function () {
       console.log(`${product.value.fixed_name}`)
       alert(`${product.value.fixed_name} 상품가입이 완료되었습니다!`)
       accountStore.userNow = res.data
+      userChange.value = '탈퇴하기'
     })
   } else {
     axios({
@@ -101,6 +102,7 @@ const joinOutProduct = function () {
     .then(res => {
       console.log('탈퇴 완료!')
       accountStore.userNow = res.data
+      userChange.value = '가입하기'
     })
   }
 } 

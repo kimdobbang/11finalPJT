@@ -28,7 +28,7 @@ export const useExchangeStore = defineStore('exchange', () => {
       allexchangerates.value = response.data
   })
     .catch(error => {
-      console.log(error)
+      console.log('get-exchange :', error)
     })
 } 
 

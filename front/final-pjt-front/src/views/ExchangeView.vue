@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>환전 계산기 </h1>
+    <ExchangeInfo @rate-selected="updateRate" />
+    <ExchangeCalculator :rate="selectedRate" />
   </div>
-  <ExchangeInfo @rate-selected="updateRate" />
-  <ExchangeCalculator :rate="selectedRate" />
   <!-- 계산 하려면 @rate-selected, :rate 쓰라고 함 지피티가 -->
 </template>
 
