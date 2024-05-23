@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <h1>Fixed List</h1>
-    <ProductSearchForm 
-    :productType="1"
-    @searchClick="searchClick"
-    />
-    <table class="sortable">
+  <div class="container">
+    <h3>정기예금 목록</h3>
+    <div>
+      <ProductSearchForm 
+      :productType="1"
+      @searchClick="searchClick"
+      />
+    </div>
+    <table class="sortable table table-primary table-striped text-center">
       <thead>
         <tr>
           <th>공시 제출월</th>
@@ -61,8 +63,18 @@ onMounted(() => {
 </script>
 
 <style scoped>
+@font-face {
+  font-family: 'Orbit-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/Orbit-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
+}
+* {
+  font-family: 'Orbit-Regular';
+  font-size: 20px;
 }
 </style>

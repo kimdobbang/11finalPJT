@@ -1,8 +1,10 @@
 <template>
-  <div style="display: flex; flex-direction: row;">
+  <div class="d-flex justify-content-between w-50">
       <div>
-        <input type="radio" v-model="bankType" value="1" checked/>1금융권 <br>
-        <input type="radio" v-model="bankType" value="2" />저축은행
+        <input type="radio" class="btn-check" name='fingrp' autocomplete="off" id="fingrp1" v-model="bankType" value="1" checked/>
+        <label class="btn btn-outline-success" for="fingrp1">1금융권</label>
+        <input type="radio" class="btn-check" name='fingrp' autocomplete="off" id="fingrp2" v-model="bankType" value="2" />
+        <label class="btn btn-outline-success" for="fingrp2">저축은행</label>
       </div>
       <div v-if="bankType < 2">
         <label for="bank">은행 선택 : </label>
@@ -12,9 +14,11 @@
         </select>
       </div>
       <div v-if="bankType > 1">
-        {{ rateType }}
-        <input type="radio" v-model="rateType" value="단리" checked/>단리 <br>
-        <input type="radio" v-model="rateType" value="복리" />복리 <br>
+        <input type="radio" class="btn-check" name="options-outlined" autocomplete="off" id="Srate" v-model="rateType" value="단리" checked>
+        <label class="btn btn-outline-success" for="Srate">단리</label>
+
+        <input type="radio" class="btn-check" name="options-outlined" autocomplete="off" id="Mrate" v-model="rateType" value="복리">
+        <label class="btn btn-outline-success" for="Mrate">복리</label>
       </div>
       <button @click="searchClick">검색</button>
   </div>
