@@ -1,6 +1,6 @@
 <template>
     <!-- navbar -->
-    <nav class="navbar navbar-expand-xl border-bottom border-body d-flex justify-content-around p-3 " data-bs-theme="dark" style="background-color: rgba(0, 0, 0, 0.792); z-index: 99; height: 100px;">
+    <nav class="navbar navbar-expand-xl border-bottom border-body d-flex justify-content-around p-3 " data-bs-theme="dark" style="background-color: rgba(0, 0, 0, 0.792); z-index: 99;">
       <div>
         <button class="navbar-toggler justify-content-around" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -26,6 +26,7 @@
         </ul>
       </div>
       <div>
+        <RouterLink :to="{name: 'profile'}" v-if="accoutStore.isLogin">My Profile</RouterLink>
         <RouterLink :to="{name: 'account'}" v-if="!accoutStore.isLogin" class="login">로그인 / 회원가입</RouterLink>
         <RouterLink :to="{name: 'login'}" v-if="accoutStore.isLogin" @click="logoutEvent">Logout</RouterLink>
       </div>
