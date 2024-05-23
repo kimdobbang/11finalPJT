@@ -77,4 +77,9 @@ watch(() => props.keyword, (newKeyword) => {
   width: 100%;
   height: 600px;
 }
+* {
+  font-size: 15px;
+  text-align: center;
+  text-justify: auto;
+}
 </style>

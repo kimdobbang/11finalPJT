@@ -1,27 +1,31 @@
 <template>
-  <div>
-    <h3> 환율계산기
-    </h3>
-    <form>
-      <div>
+  <div class="d-flex flex-column justify-content-center align-items-center mt-5">
+    <div class="container d-flex flex-column justify-content-center align-items-center mt-4 mb-3">
+      <h2>환율계산기</h2>
+      <p>원화를 입력해 외화를 계산하세요!</p>
+    </div>
+
+      <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="mb-4">
         <label for="currency" id="">화폐 선택</label>
-      <select v-model="selectedCurrency" @change="selectRate" id="currency">
-        <option value="화폐" selected disabled>화폐</option>
-        <option v-for="allexchangerate in store.allexchangerates" :key="allexchangerate.CUR_UNIT" :value="allexchangerate">{{ allexchangerate.CUR_NM }}</option>
-      </select> 
+        <select v-model="selectedCurrency" @change="selectRate" id="currency">
+          <option value="화폐" selected disabled>화폐</option>
+          <option v-for="allexchangerate in store.allexchangerates" :key="allexchangerate.CUR_UNIT" :value="allexchangerate">{{ allexchangerate.CUR_NM }}</option>
+        </select> 
+      </div>
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="form-floating my-3">
+          <input type="text" class="form-control" id="won" placeholder="원화 입력" v-model.trim="won" @input="convertToForex">
+          <label for="won">원화</label>
+        </div>
+        <p class="mx-4" style="text-align: center;"> ↔ </p>
+        <div class="form-floating my-3">
+          <input type="text" class="form-control" id="forex" placeholder="외화 입력" v-model.trim="forex" @input="convertToWon">
+          <label for="forex">{{ selectedCurrency?.CUR_NM }}</label>
+        </div>
+      </div>
       </div>
 
-      <div>
-        <label for="won">원화</label>
-        <input v-model.number="won" type="text" id="won" @input="convertToForex">
-      </div>
-        
-      <div>
-        <label for="forex">외화</label>
-        <input v-model.number="forex" type="text" id="forex" @input="convertToWon">
-        <p style="display: inline">{{ selectedCurrency?.CUR_UNIT }}</p>
-      </div>
-    </form>
   </div>
 </template>
 

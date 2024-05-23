@@ -1,29 +1,33 @@
 <template>
-  <div>
-    <form @submit.prevent="handleSubmit">
-      <label for="metropolitan">은행 찾아보기 </label>
-      <select v-model="selectedMetropolitan" @change="updateDistricts" id="metropolitan">
-        <option value="" selected disabled>행정구역</option>
-        <option v-for="(name, key) in Divisions" :key="key" :value="key">{{ name }}</option>
-      </select>
-
-      <label v-if="selectedMetropolitan" for="district">행정구역:</label>
-      <select v-if="selectedMetropolitan" v-model="selectedDistrict" id="district">
-        <option value="" selected disabled>시/군/구</option>
-        <option v-for="district in districts" :key="district">{{ district }}</option>
-      </select>
-
-      <label v-if="selectedDistrict" for="options">은행:</label>
-      <select v-if="selectedDistrict" v-model="selectedBank" id="options" name="options">
-        <option value="" selected disabled>은행</option>
-        <option value="국민은행">국민은행</option>
-        <option value="신한은행">신한은행</option>
-        <option value="우리은행">우리은행</option>
-        <option value="하나은행">하나은행</option>
-        <option value="농협은행">농협은행</option>
-        <option value="대구은행">대구은행</option>
-      </select>
-      <input type="submit" value="찾기 !">
+  <div class="d-flex w-75">
+    <form @submit.prevent="handleSubmit" class="d-flex justify-content-center align-items-center w-100">
+      <div class="floating mx-4">
+        <label for="metropolitan">은행 찾아보기</label>
+        <select v-model="selectedMetropolitan" @change="updateDistricts" id="metropolitan" class="form-select">
+          <option value="" selected disabled>행정구역</option>
+          <option v-for="(name, key) in Divisions" :key="key" :value="key">{{ name }}</option>
+        </select>
+      </div>
+      <div class="floating mx-4">
+        <label v-if="selectedMetropolitan" for="district">행정구역:</label>
+        <select v-if="selectedMetropolitan" v-model="selectedDistrict" id="district" class="form-select">
+          <option value="" selected disabled>시/군/구</option>
+          <option v-for="district in districts" :key="district">{{ district }}</option>
+        </select>
+      </div>
+      <div class="floating mx-4">
+        <label v-if="selectedDistrict" for="options">은행:</label>
+        <select v-if="selectedDistrict" v-model="selectedBank" id="options" name="options" class="form-select">
+          <option value="" selected disabled>은행</option>
+          <option value="국민은행">국민은행</option>
+          <option value="신한은행">신한은행</option>
+          <option value="우리은행">우리은행</option>
+          <option value="하나은행">하나은행</option>
+          <option value="농협은행">농협은행</option>
+          <option value="대구은행">대구은행</option>
+        </select>
+      </div>
+      <input type="submit" value="찾기 !" class="searchbtn">
     </form>
   </div>
 </template>
@@ -88,3 +92,28 @@ const handleSubmit = () => {
   emit('update:keyword', searchQuery);
 };
 </script>
+
+<style scoped>
+.searchbtn {
+  width: 10%;
+  height: 40px;
+  border: 0px;
+  border-radius: 40px;
+  margin-top: 25px;
+  margin-bottom: 0;
+  margin-left: 30px;
+  background-color: rgb(131, 162, 255);
+  font-family: 'KCC-Hanbit';
+  font-size: 20px;
+  color: whitesmoke;
+}
+.searchbtn:hover {
+  background-color:rgb(180, 189, 255);
+  transition: 0.5s;
+}
+.searchbtn:active {
+  background-color: rgb(133, 140, 188);
+  box-shadow: inset 3px 3px 3px 3px  rgb(166, 175, 235);
+  transition: 0.2s;
+}
+</style>
