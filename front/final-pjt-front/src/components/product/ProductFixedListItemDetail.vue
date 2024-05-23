@@ -4,18 +4,18 @@
     <RouterLink :to="{name:'fixed'}">◀</RouterLink>
   </div>
   <div v-if="product">
-    <table class="table table-striped text-center">
+    <table class="table table-striped text-center" style="width: 100%;">
       <tbody>
         <tr>
           <th scope="row">상품 코드</th>
           <td colspan="3">{{ product.fixed_code }}</td>
         </tr>
         <tr>
-          <th scope="row">은행명</th>
+          <th scope="row" style="font-weight: bold;">은행명</th>
           <td colspan="3">{{ product.kor_co_nm }}</td>
         </tr>
         <tr>
-          <th scope="row">상품 이름</th>
+          <th scope="row" style="font-weight: bold;">상품 이름</th>
           <td colspan="3">{{ product.fixed_name }}</td>
         </tr>
         <tr>
@@ -34,7 +34,9 @@
       </tbody>
     </table>
   </div>
-  <div class="d-flex flex-wrap">
+  <hr>
+  <h1>상품 옵션 리스트</h1>
+  <div class="d-flex flex-wrap w-100">
     <div class="col-6 col-md-4 col-lg-3" v-for="option in options">
       <div class="card m-3">
         <div class="card-header">
@@ -49,22 +51,22 @@
     </div>
   </div>
   <form @submit.prevent="joinOutProduct" style="margin-bottom: 20px;">
-    <input type="submit" v-model="userChange">
+    <input class="join" type="submit" v-show="userChange==='가입하기'" v-model="userChange">
+    <input class="out" type="submit" v-show="userChange==='탈퇴하기'" v-model="userChange">
   </form>
   </div>
 </template>
 
 <script setup>
-import { useRoute, useRouter, RouterLink } from 'vue-router';
+import { useRoute, RouterLink } from 'vue-router';
 import { useProductStore } from '@/stores/productstore';
 import { useAccountStore } from '@/stores/accountstore';
-import { onMounted,ref,watch } from 'vue';
+import { onMounted,ref } from 'vue';
 import axios from 'axios';
 
 const productStore = useProductStore()
 const accountStore = useAccountStore()
 const route = useRoute()
-const router = useRouter()
 const product = ref({})
 const options = ref([])
 const deny = ref(['-','제한 없음','서민 전용','일부 제한'])
@@ -117,6 +119,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
+* {
+ font-family: 'Orbit-Regular';
+}
+h1 {
+  font-family: 'GamtanRoad Batang';
+}
 a {
   text-decoration: none;
   color: whitesmoke;
@@ -137,6 +145,48 @@ a:hover {
 .backbtn:active {
   background-color: rgb(133, 140, 188);
   box-shadow: inset 3px 3px 3px 3px  rgb(166, 175, 235);
+  transition: 0.2s;
+}
+
+.join {
+  width: 100%;
+  height: 40px;
+  border: 0px;
+  border-radius: 40px;
+  margin-top: 20px;
+  background-color: rgb(131, 162, 255);
+  font-family: 'KCC-Hanbit';
+  font-size: 20px;
+  color: whitesmoke;
+}
+.join:hover {
+  background-color:rgb(180, 189, 255);
+  transition: 0.5s;
+}
+.join:active {
+  background-color: rgb(133, 140, 188);
+  box-shadow: inset 3px 3px 3px 3px  rgb(166, 175, 235);
+  transition: 0.2s;
+}
+
+.out {
+  width: 100%;
+  height: 40px;
+  border: 0px;
+  border-radius: 40px;
+  margin-top: 20px;
+  background-color: rgb(214, 79, 101);
+  font-family: 'KCC-Hanbit';
+  font-size: 20px;
+  color: whitesmoke;
+}
+.out:hover {
+  background-color:rgb(230, 115, 134);
+  transition: 0.5s;
+}
+.out:active {
+  background-color: rgb(173, 62, 80);
+  box-shadow: inset 3px 3px 3px 3px  rgb(129, 56, 69);
   transition: 0.2s;
 }
 </style>
