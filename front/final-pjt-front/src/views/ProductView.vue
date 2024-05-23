@@ -3,16 +3,14 @@
     <h1>금융상품 목록</h1>
     <div>
       <ul class="nav nav-underline">
-  <li class="nav-item">
-    <RouterLink :to="{name: 'fixed'}" :class="[first ? 'nav-link active' : 'nav-link']" @click="nowArea(1)">정기예금</RouterLink> 
-  </li>
-  <li class="nav-item">
-    <RouterLink :to="{name: 'installment'}" :class="[first ? 'nav-link' : 'nav-link active']" @click="nowArea(2)">적금</RouterLink>
-  </li>
-  </ul>
-  
+        <li class="nav-item">
+          <RouterLink :to="{name: 'fixed'}" :class="[first ? 'nav-link active' : 'nav-link']" @click="nowArea(1)">정기예금</RouterLink> 
+        </li>
+        <li class="nav-item">
+          <RouterLink :to="{name: 'installment'}" :class="[first ? 'nav-link' : 'nav-link active']" @click="nowArea(2)">적금</RouterLink>
+        </li>
+      </ul>
     </div>
-    
   </div>
   <div class="d-flex justify-content-center align-items-center">
     <RouterView />

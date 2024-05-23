@@ -1,6 +1,11 @@
 <template>
-  <div>
+  <div class="container d-flex flex-column justify-content-center align-items-center mt-4">
+    <h1>주변 은행 찾기</h1>
+  </div>
+  <div class="container d-flex justify-content-center align-items-center">
     <BankSearchForm @update:keyword="updateKeyword" />
+  </div>
+  <div class="container d-flex justify-content-center align-items-center mt-5">
     <BankMap :keyword="keyword" />
   </div>
 </template>
@@ -18,5 +23,17 @@ const updateKeyword = (newKeyword) => {
 </script>
 
 <style scoped>
-/* 필요한 스타일 추가 */
+a{
+  text-decoration: none;
+  color: rgb(125, 122, 122);
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.container {
+  font-family:'GamtanRoad Batang';
+  font-size: 20px;
+}
+.nav-link:hover {
+  color: #83A2FF;
+}
 </style>

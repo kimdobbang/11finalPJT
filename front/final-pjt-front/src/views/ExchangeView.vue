@@ -1,6 +1,8 @@
 <template>
-  <div>
+  <div class="container">
     <ExchangeInfo @rate-selected="updateRate" />
+  </div>
+  <div class="container">
     <ExchangeCalculator :rate="selectedRate" />
   </div>
   <!-- 계산 하려면 @rate-selected, :rate 쓰라고 함 지피티가 -->
