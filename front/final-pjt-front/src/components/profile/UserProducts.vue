@@ -1,14 +1,20 @@
 <template>
-  <div>
-    <h2>가입한 상품들</h2>
-    <div v-for="(product, idx) in user.fixed">
-      <p>{{ idx + 1 }}. [정기예금] {{ productStore.fixedList[product-1].kor_co_nm }} - {{ productStore.fixedList[product-1].fixed_name }}</p>
+  <div class="col-5">
+    <h3>가입한 상품들</h3>
+    <div class="card my-3 w-75 text-bg-success">
+      <div class="card-header" style="font-weight: bold;">정기예금</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" v-for="(product, idx) in user.fixed">{{ idx + 1 }}. [정기예금] {{ productStore.fixedList[product-1].kor_co_nm }} - {{ productStore.fixedList[product-1].fixed_name }}</li>
+      </ul>
     </div>
-    <div v-for="(product, idx) in user.installment">
-      <p>{{ idx + 1 + indexplus }}. [정기적금] {{ productStore.installmentList[product-1].kor_co_nm }} - {{ productStore.installmentList[product-1].installment_name }}</p>
+    <div class="card my-3 w-75 text-bg-warning">
+      <div class="card-header" style="font-weight: bold;">적금</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" v-for="(product, idx) in user.installment">{{ idx + 1 + indexplus }}. [적금] {{ productStore.installmentList[product-1].kor_co_nm }} - {{ productStore.installmentList[product-1].installment_name }}</li>
+      </ul>
     </div>
   </div>
-  <div>
+  <div class="mt-5 mb-5 col-11">
     <h2>가입한 상품 금리</h2>
     <canvas ref="chartCanvas"></canvas>
   </div>
@@ -125,5 +131,10 @@ const installmentintr2Array = user.value.installment.map(id => {
 </script>
 
 <style scoped>
-
+* {
+ font-family: 'Orbit-Regular';
+}
+h2 {
+  font-family: 'GamtanRoad Batang';
+}
 </style>

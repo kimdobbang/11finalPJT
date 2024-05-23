@@ -1,8 +1,8 @@
 <template>
-  <div class="card text-center mb-3 item" @click="handleClick">
+  <div class="card border-success text-center mb-3 item" @click="handleClick">
    <!--계산을위해 click이벤트 추가 환율 정보를 표시하는 코드 -->
-    <div class="card-body">
-      <h5 class="card-title">{{exchangerate.CUR_NM }}({{ exchangerate.CUR_UNIT }})</h5>
+   <div class="card-header">{{exchangerate.CUR_NM }}({{ exchangerate.CUR_UNIT }})</div>
+    <div class="card-body text-success">
       <p class="card-text">{{ exchangerate.DEAL_BAS_R }}</p>
     </div>
   </div>

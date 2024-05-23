@@ -6,20 +6,21 @@
     </div>
 
       <div class="d-flex flex-column justify-content-center align-items-center">
-      <div class="mb-4">
+      <div class="floating mb-4">
         <label for="currency" id="">화폐 선택</label>
-        <select v-model="selectedCurrency" @change="selectRate" id="currency">
+        <select v-model="selectedCurrency" @change="selectRate" id="currency" class="form-select">
           <option value="화폐" selected disabled>화폐</option>
           <option v-for="allexchangerate in store.allexchangerates" :key="allexchangerate.CUR_UNIT" :value="allexchangerate">{{ allexchangerate.CUR_NM }}</option>
         </select> 
       </div>
+
       <div class="d-flex justify-content-center align-items-center">
-        <div class="form-floating my-3">
+        <div class="form-floating my-1">
           <input type="text" class="form-control" id="won" placeholder="원화 입력" v-model.trim="won" @input="convertToForex">
           <label for="won">원화</label>
         </div>
         <p class="mx-4" style="text-align: center;"> ↔ </p>
-        <div class="form-floating my-3">
+        <div class="form-floating my-1">
           <input type="text" class="form-control" id="forex" placeholder="외화 입력" v-model.trim="forex" @input="convertToWon">
           <label for="forex">{{ selectedCurrency?.CUR_NM }}</label>
         </div>
@@ -72,5 +73,10 @@ const selectRate = () => {
 </script>
 
 <style scoped>
-
+* {
+ font-family: 'Orbit-Regular';
+}
+h2,p {
+  font-family: 'GamtanRoad Batang';
+}
 </style>

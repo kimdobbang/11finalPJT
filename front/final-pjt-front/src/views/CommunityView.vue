@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <h1>Community</h1>
-  </div>  
-  
-  <RouterView />
+  <div class="container d-flex flex-column justify-content-center align-items-center mt-4">
+    <h1>커뮤니티</h1>
+  </div>
+  <hr class="border border-2 opacity-30">  
 
+  <div class="container d-flex flex-column justify-content-center align-items-center">
+    <RouterView />
+  </div>
 </template>
 
 <script setup>
@@ -21,5 +23,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+h1 {
+  font-family: 'GamtanRoad Batang';
+}
 </style>
